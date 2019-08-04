@@ -1,1 +1,4 @@
 dhparam
+.env
+node_modules
+nginx-conf
