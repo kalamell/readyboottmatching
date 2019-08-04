@@ -5,7 +5,7 @@ const path = require('path');
 
 const { isAuth } = require('../helpers/auth');
 
-router.get('/', isAuth, function(req,res){
+router.get('/', isAuth, async function(req,res){
     const user = req.session.passport.user;
     const data  = await Users.findOne({facebookid: user.id});
 
