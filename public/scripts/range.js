@@ -109,8 +109,8 @@ function inputRange() {
 	var slider = document.querySelector('#slider'),
         lowDollarAmount = document.querySelector('.lowDollarAmount'),
         highDollarAmount = document.querySelector('.highDollarAmount'),
-        min = 18,
-        max = 80;
+        min = 23,
+        max = 40;
 
     slider.addEventListener('change', function () {
         lowDollarAmount.textContent = formatPrice(min + ((max - min) * (slider.valueLow / 100)));
@@ -120,7 +120,7 @@ function inputRange() {
 
     function formatPrice(price) {
         if (price != 0) {
-            var formattedPrice = parseFloat(price, 10).toFixed(2).toString().replace(/(\d+)(?=(\d{3})+\.?)/g + 'ปี', '18 ปี,');
+            var formattedPrice = parseFloat(price, 10).toFixed(0).toString().replace(/(\d+)(?=(\d{3})+\.?)/g + 'ปี', '18 ปี,');
             return formattedPrice;
         }
     }

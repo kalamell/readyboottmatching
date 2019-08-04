@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 
 
-const { isAuth } = require('../helpers/auth');
+const { isAuth, isLogin } = require('../helpers/auth');
 
 
 

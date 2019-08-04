@@ -8,6 +8,17 @@
   <meta name="author" content="ready">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
   <link href="bundle.css" rel="stylesheet">
+  <style>
+    #profile .profile-wrap ul li input[type="number"] {
+    display: block;
+    width: 100%;
+    background: transparent;
+    color: #fff;
+    border: 0;
+    outline: none;
+}
+
+  </style>
 </head>
 <body>
   <section class="wrapper" id="profile">
@@ -54,10 +65,25 @@
                <small></small>
             </label>
           </li>
+
           <li class="province">
             <p>จังหวัด</p>
             <input type="text" name="province" value="{{ data.province }}" placeholder="กรุณากรอกข้อมูล">
+            
           </li>
+
+           <li class="province">
+            <p>อายุ</p>
+            <input type="number" name="age" value="{{ data.age }}" placeholder="กรุณากรอกอายุ"
+              onkeypress="return isNumeric(event)"
+              oninput="maxLengthCheck(this)"
+              type = "number"
+              maxlength = "2"
+              min = "23"
+              max = "40"
+            /s>
+          </li>
+
           <li class="title">คุณสนใจ</li>
           <li>
             <p>ผู้ชาย</p>
@@ -105,5 +131,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="scripts/range.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+  <script>
+  function maxLengthCheck(object) {
+    if (object.value.length > object.maxLength)
+      object.value = object.value.slice(0, object.maxLength)
+  }
+    
+  function isNumeric (evt) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode (key);
+    var regex = /[0-9]|\./;
+    if ( !regex.test(key) ) {
+      theEvent.returnValue = false;
+      if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+</script>
+
 </body>
 </html>

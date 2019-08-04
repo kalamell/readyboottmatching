@@ -10,6 +10,7 @@ const Users = new Schema ({
     sex: { type: String, default: 'male' },
     token: { type: String },
     email: { type: String },
+    age: { type: Number },
     province: { type: String, default: 'กรุงเทพมหานคร' },
     profile_url: { type: String },
     interest: { type: String, default: 'female' },

@@ -91,7 +91,7 @@ setCardStyle();
 function getCardsMarkup() {
   let markUp = '';
   state.cards.map((item, index) => {
-    markUp += '<div class="app--element"><img src="' + item.img +'"></div><p class="pic-name">สวัสดี คุณ'+ item.name + '</p><p class="pic-detail">อายุ '+ item.age + ' ปี ● ' + item.location + '</p>';
+    markUp += '<div class="app--element" id="#' + index + '"><img src="' + item.img +'"><p class="pic-name">สวัสดี คุณ'+ item.name + '</p><p class="pic-detail">อายุ '+ item.age + ' ปี ● ' + item.location + '</p></div>';
   })
   
   return markUp;
@@ -183,15 +183,25 @@ function moveBlockOutside(delta) {
   }
   
   block.style.transition = 'transform .25s, opacity .25s';
-
+  var type = 'n';
   if (delta) {
     // className = 'moveRight';
     block.style.transform = block.style.transform + ' translateX(250%)';
+    console.log('y');
+    type = 'y';
+    
   } else {
     block.style.transform = block.style.transform + ' translateX(-250%)';
+    console.log('n');
+    type = 'n';
   }
+
+  console.log(block.id);
   block.classList.add('removed');
+
+  setMatch(type, block.id);
 }
+
 
 function returnBlockBack() {
   state.element.style.transition = 'left .25s, top .25s';
@@ -236,10 +246,10 @@ function onButtonClick(e) {
   state.element.style.opacity = '0';
   if (/accept/ig.test(buttonClass)) {
     // console.log('it is accept')
-    hideObject(0)
+    hideObject(1)
   } else {
     // console.log('it is cancel')
-    hideObject(1)
+    hideObject(0)
   }
 }
 

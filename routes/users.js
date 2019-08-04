@@ -26,12 +26,13 @@ router.get('/update', isAuth, (req, res) => {
 })
 
 router.post('/update', isAuth, async (req, res) => {
-    let { sex, interest, province } = req.body;
+    let { sex, interest, province, age } = req.body;
     const user = req.session.passport.user;
     await Users.findOneAndUpdate({facebookid: user.id}, {
        sex, 
        interest, 
-       province 
+       province, 
+       age
     });
     
     res.redirect('/match');

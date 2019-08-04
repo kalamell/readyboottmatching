@@ -10,4 +10,14 @@ helpers.isAuth = async (req, res, next) => {
     }
 }
 
+helpers.isLogin = async (req, res, next) => {
+    const user = req.session.passport;
+    if (user != null) {
+        res.redirect('/user');
+        
+    } else {
+        next();
+    }
+}
+
 module.exports = helpers;
