@@ -16,4 +16,4 @@ RUN npm install -g pm2
 COPY --chown=node:node . .
 
 EXPOSE 8080
-CMD ["pm2", "start", "app.js"]
+CMD ["pm2-runtime", "app.js"]
