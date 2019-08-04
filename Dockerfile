@@ -8,11 +8,10 @@ COPY package*.json ./
 
 USER node
 
-RUN npm install pm2 -g
 
 RUN npm install
 
 COPY --chown=node:node . .
 
 EXPOSE 8080
-CMD ["pm2-runtime", "app.js"]
+CMD ["node", "app.js"]

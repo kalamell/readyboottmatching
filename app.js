@@ -18,5 +18,8 @@ app.use('/', index);
 app.use('/users', users);
 
 app.listen(port, function () {
-  console.log('Example app listening on port 8080!')
+  console.log('Example app listening on port 8080!');
+  /*
+  ocker exec -it db mongo readyboottmatchingdb -u readyboottmatchinguser
+  */
 })
