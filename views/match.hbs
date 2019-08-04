@@ -49,6 +49,18 @@
 function setMatch(type, block) {
   console.log(block);
 }
+
+
+const cards = [
+  {{#each users}}
+  {
+    img: '{{profile_url}}',
+    name: '{{fullname}}',
+    age: '{{age}}',
+    location: '{{province}}'
+  },
+  {{/each}}
+];
   </script>
 
   <script src="/scripts/card.js"></script>

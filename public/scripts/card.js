@@ -1,4 +1,5 @@
 
+/*
 const cards = [
   {
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRORccZWdtma5BG3TTJdS7-fKllC1xcSOXOtu1o0ZM_Myxr32QQ',
@@ -61,6 +62,7 @@ const cards = [
     location: 'BKK'
   },
 ];
+*/
 
 let state = {
   coordinates: {
