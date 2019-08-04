@@ -47,13 +47,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /data/www/node_project/views/
+      device: /data/www/readyboottmatching/views/
       o: bind
   dhparam:
     driver: local
     driver_opts:
       type: none
-      device: /data/www/node_project/dhparam/
+      device: /data/www/readyboottmatching/dhparam/
       o: bind
 
 networks:
