@@ -14,6 +14,8 @@ const Users = new Schema ({
     province: { type: String, default: 'กรุงเทพมหานคร' },
     profile_url: { type: String },
     interest: { type: String, default: 'female' },
+    range_min: { type: Number, default: 18},
+    range_max: { type: Number, default: 40},
     matches: [{
         match: {
             type: String,

@@ -17,6 +17,7 @@
     border: 0;
     outline: none;
 }
+select { color: #fff; width: 100%;}
 
   </style>
 </head>
@@ -68,8 +69,12 @@
 
           <li class="province">
             <p>จังหวัด</p>
-            <input type="text" name="province" value="{{ data.province }}" placeholder="กรุณากรอกข้อมูล">
-            
+            <select name="province" id="province">
+              <option value="">เลือกจังหวัด</option>
+              {{#each data_provinces}}
+              <option value="{{province_name}}" {{select}}>{{province_name}}</option>
+              {{/each}}
+            </select>
           </li>
 
            <li class="province">
@@ -121,6 +126,8 @@
                 <div class="lowDollarAmount"></div>
                 <div class="highDollarAmount"></div>
             </div>
+            <input type="hidden" id="range_min" name="range_min" value="{{data.range_min}}" />
+            <input type="hidden" id="range_max" name="range_max" value="{{data.range_max}}" />
           </li>
         </ul>
         <button type="submit">ค้นหาคู่ของคุณ</button>

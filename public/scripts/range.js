@@ -116,6 +116,13 @@ function inputRange() {
         lowDollarAmount.textContent = formatPrice(min + ((max - min) * (slider.valueLow / 100)));
         highDollarAmount.textContent = formatPrice(min + ((max - min) * (slider.valueHigh / 100)));
 
+        var m = min + ((max - min) * (slider.valueLow / 100));
+        var mx = min + ((max - min) * (slider.valueHigh / 100));
+        document.getElementById("range_min").value = formatPrice(m);
+        document.getElementById("range_max").value = formatPrice(mx);
+
+        console.log('xxx');
+
     });
 
     function formatPrice(price) {
