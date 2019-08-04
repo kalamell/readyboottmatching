@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
+const Users = require('../models/users');
+const Provinces = require('../models/provinces');
+
 
 const { isAuth } = require('../helpers/auth');
 
