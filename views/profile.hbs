@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ready</title>
+  <meta name="description" content="ready">
+  <meta name="author" content="ready">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link href="bundle.css" rel="stylesheet">
+</head>
+<body>
+  <section class="wrapper" id="profile">
+     <img class="logo" src="images/logo_ready.png" alt="">
+    <div class="profile-wrap">
+     <div class="pic-wrap">
+      <div class="profile-pic">
+        <div class="profile-current">
+          <img src="{{ data.profile_url }}" alt="">
+        </div>
+        <div class="profile-new">
+           <input type="file" id="profilePic">
+           <label for="profilePic"><img src="images/picture.png" alt=""></label>
+        </div>
+        <h5>สวัสดี คุณ<span>{{data.fullname}}</span></h5>
+        <p>คุณสามารถเปลี่ยนรูปของตัวเองได้</p>
+       </div>
+      </div>
+
+      <form method="POST" action="/user/update">
+        <ul>
+          <li class="title">คุณคือ</li>
+          <li>
+            <p>ผู้ชาย</p>
+            
+            <label for="male" class="switchSmall m5">
+              <input type="radio" id="male" {{isMale data.sex}} name="sex" value="male">
+              <small></small>
+            </label>
+          </li>
+          <li>
+            <p>ผู้หญิง</p>
+            
+            <label for="female" class="switchSmall m5">
+              <input type="radio" id="female" {{isFeMale data.sex}}  name="sex" value="female">
+              <small></small>
+            </label>
+          </li>
+          <li>
+            <p>ไม่ระบุ</p>
+           
+            <label for="glbt" class="switchSmall m5">
+               <input type="radio" id="glbt" {{isGLBT data.sex}} name="sex" value="glbt">
+               <small></small>
+            </label>
+          </li>
+          <li class="province">
+            <p>จังหวัด</p>
+            <input type="text" name="province" value="{{ data.province }}" placeholder="กรุณากรอกข้อมูล">
+          </li>
+          <li class="title">คุณสนใจ</li>
+          <li>
+            <p>ผู้ชาย</p>
+             
+              <label for="in-male" class="switchSmall m5">
+                 <input type="radio" id="in-male" {{isMale data.interest}} name="interest" value="male">
+                 <small></small>
+              </label>
+          </li>
+          <li>
+           <p>ผู้หญิง</p>
+           
+            <label for="in-female" class="switchSmall m5">
+               <input type="radio" id="in-female" {{isFeMale data.interest}} name="interest" value="female">
+               <small></small>
+            </label>
+          </li>
+          <li>
+            <p>ไม่ระบุ</p>
+            <label for="in-lgbt" class="switchSmall m5">
+              <input type="radio" id="in-lgbt" {{isGLBT data.interest}} name="interest" value="lgbt">
+              <small></small>
+            </label>
+          </li>
+          <li class="input-range">
+            <p>อายุระหว่าง</p>
+            <div class="result">
+              <span class="lowDollarAmount"></span> 
+              <p> - </p> 
+              <span class="highDollarAmount"></span>  
+              <p> ปี</p>
+            </div>
+            <input id="slider" type="range" multiple value="15,85" />
+            <div class="range">
+                <div class="lowDollarAmount"></div>
+                <div class="highDollarAmount"></div>
+            </div>
+          </li>
+        </ul>
+        <button type="submit">ค้นหาคู่ของคุณ</button>
+      </form>
+
+    </div>
+  </section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="scripts/range.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+</body>
+</html>
