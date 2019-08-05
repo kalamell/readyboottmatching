@@ -110,7 +110,12 @@ function setCardStyle(from = 0) {
   for (let i = from; i < elements.length; i++) {
     elements[i].style.zIndex = elements.length - i;
     elements[i].style.transform = 'scale(' + (length - ((i - from) * 0.5))/length + ') translateY(-' + (i - from) * 20 + 'px)';
-    elements[i].style.opacity = (length - ((i - from)*0.8))/length;
+    //elements[i].style.opacity = (length - ((i - from)*0.8))/length;
+    if (i ==0) {
+      elements[i].style.opacity = (length - ((i - from)*0.8))/length;
+    } else { 
+      elements[i].style.opacity = 0;
+    }
     if (!i) {
       elements[i].addEventListener('touchstart', moveElement);
       elements[i].addEventListener('mousedown', moveElement);
