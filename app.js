@@ -147,6 +147,16 @@ Handlebars.registerHelper("isGLBT", function(value) {
 })
 
 
+
+Handlebars.registerHelper("isType", function(value) {
+  if (value == 'sp') {
+    return '/images/button_special.png';
+  } else { 
+    return '/images/button_like.png';
+  }
+})
+
+
 app.listen(port, '127.0.0.1', function () {
   console.log('Example app listening on port 8080!');
   /*

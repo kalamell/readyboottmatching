@@ -142,19 +142,23 @@ router.get('/matches', isAuth, async (req, res) => {
                             data_user.push({
                                 'name': _d.fullname,
                                 'type': __d.type,
-                                'profile_url': _d.profile_url
+                                'profile_url': _d.profile_url,
+                                'profile_url_me': data.profile_url
                             });
                         }
-                        console.log('data: ', data_user);
                     })
+
                 })
             })
+
+            res.render('list-match', {
+                me,
+                data_user
+            });
         });
    
    
-                res.render('list-match', {
-                    me,
-                });
+                
 })
 module.exports = router;
 
