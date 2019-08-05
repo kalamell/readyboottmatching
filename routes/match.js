@@ -85,7 +85,7 @@ router.post('/matching', async (req, res) => {
                     .populate('match')
                     .populate('othermatches.match', '_id fullname')
                     .exec(function(error, _data) {
-                        if (error) {
+                        /*if (error) {
                             res.status(500);
                             res.json('error', { error: error });
                         }
@@ -96,7 +96,9 @@ router.post('/matching', async (req, res) => {
                                     id: matchid,
                                 });
                             }
-                        })
+                        })*/ 
+
+                        res.json(_data);
                     
                     });
                 }
