@@ -88,14 +88,11 @@ router.post('/matching', async (req, res) => {
                         .populate('othermatches.match', '_id fullname')
                         .exec(function(error, _data) {
                             if (_data != null) {
-                                /*_data.othermatches.forEach(function(e) {
-                                    if (e.type == 'y') {
-                                        res.status(200).json({
-                                            type: e.type, 
-                                            id: matchid,
-                                        });
+                                _data.othermatches.forEach(function(e) {
+                                    if (e.type == 'y' && e.match._id == user.id) {
+                                        console.log(e);
                                     }
-                                })*/
+                                })
                                 res.status(200).json({
                                     _data
                                 })
