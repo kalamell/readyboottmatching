@@ -185,36 +185,32 @@ router.post('/matching', async (req, res) => {
                         
                     }
 
-                    if (user.id != matchid) {
-                        Users.findOne({_id: user.id, "othermatches.match" : matchid})
-                        .populate('match')
-                        .populate('othermatches.match', '_id type fullname')
-                        .exec(function(error, _data) {
-                            console.log(_data);
-                            if (_data != null) {
-                                _data.othermatches.forEach(function(e) {
-                                    console.log('data >>> ', e);
-                                    if (e.type == 'y' && e.match == matchid) {
-                                        res.status(200).json({
-                                            type:e.type,
-                                            id: e.match
-                                        });
-                                        return false;
-                                    }
-                                })
-                                
-                            } else { 
-                                
-                                res.status(200).json({
-                                    'error': 'no data ' + matchid + ' : ' + user.id,
-                                })
-                            }
-                        });
-                    } else { 
-                        res.status(200).json({
-                            'error': 'erro',
-                        })
-                    }
+
+                    Users.findOne({_id: user.id, "othermatches.match" : matchid})
+                    .populate('match')
+                    .populate('othermatches.match', '_id type fullname')
+                    .exec(function(error, _data) {
+                        console.log(_data);
+                        if (_data != null) {
+                            _data.othermatches.forEach(function(e) {
+                                console.log('data >>> ', e);
+                                if (e.type == 'y' && e.match == matchid) {
+                                    res.status(200).json({
+                                        type:e.type,
+                                        id: e.match
+                                    });
+                                    return false;
+                                }
+                            })
+                            
+                        } else { 
+                            
+                            res.status(200).json({
+                                'error': 'no data ' + matchid + ' : ' + user.id,
+                            })
+                        }
+                    });
+                    
                 });
             }
 
