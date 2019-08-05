@@ -24,7 +24,7 @@ router.get('/', isAuth, async function(req,res){
         }
     }).exec(function(err, data_users) {
         let users = [];
-        data_users.foreEach(function(e, v) {
+        data_users.forEach(function(e, v) {
             if (e._id != user.id) {
                 users.push({
                     'facebookid': e.facebookid,
