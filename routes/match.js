@@ -88,14 +88,15 @@ router.post('/matching', async (req, res) => {
                         if (_data != null) {
                             _data.othermatches.forEach(function(e) {
                                 if (e.type == 'y') {
-                                    res.json({
+                                   
+                                    res.status(200).json({
                                         type: e.type, 
                                         id: matchid,
                                     });
                                 }
                             })
                         } else { 
-                            res.json({
+                            res.status(500).json({
                                 'error': 'no data',
                             })
                         }
@@ -112,7 +113,7 @@ router.post('/matching', async (req, res) => {
                             }
                         })*/ 
 
-                        res.json(_data);
+                        res.status(200).json(_data);
                     
                     });
                 }
