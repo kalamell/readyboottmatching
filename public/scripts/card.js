@@ -277,11 +277,16 @@ function onButtonSpClick(e) {
 
 
 function onElementsEnd() {
-  top.location.reload();
+  setTimeout(function() {
+    cardsBlock.innerHTML = getCardsMarkup();
+    setCardStyle();
+  }, 1000);
+  /*
   document.querySelector('.app--buttons').classList.add('hidden');
   document.querySelector('.app--title').classList.add('hidden');
   document.querySelector('.app--restart').classList.remove('hidden');
   document.querySelector('.app--restart').classList.remove('hidden');
+  */
 }
 
 
