@@ -64,7 +64,7 @@
   {{#if ios}}
   document.getElementById("downloadios").addEventListener("click", function() {
     html2canvas(document.querySelector('.n1')).then(function(canvas) {
-      $("#ios").append(canvas);
+      $("#ios").append("<img  src='" + canvas.toDataURL() + "'/>");
       $(".n1").hide();
     });
 });
