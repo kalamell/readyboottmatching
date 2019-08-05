@@ -17,12 +17,12 @@ router.get('/', isAuth, async function(req,res){
     let range_max = data.range_max;
 
     Users.find({
-        
+        /*
         sex: interest,
         age: {
             $gte: range_min ,
             $lte: range_max,
-        }
+        }*/
     }).exec(function(err, data_users) {
         if (data_users.length == 0) {
             res.redirect('/user');
@@ -121,24 +121,35 @@ router.post('/matching', async (req, res) => {
                     
                     Users.findOne({_id: matchid, "othermatches.match" : user.id})
                     .populate('match')
-                    .populate('othermatches.match', '_id fullname')
+                    .populate('othermatches.match', '_id type fullname')
                     .exec(function(error, _data) {
+                        console.log("me data", _data);
                         if (_data != null) {
+                            var _find = '';
                             _data.othermatches.forEach(function(e) {
-                                console.log('data >>> ', e.match);
+                                console.log('data >>> ', e.type, e.match, e.match._id, user.id);
                                 if (e.type == 'sp' && e.match._id == user.id) {
-                                    res.status(200).json({
-                                        type:e.type,
-                                        id: e.matchid
-                                    });
-                                    return false;
+                                    console.log('fine ok');
+                                    _find = 'ok';
+                                    
                                 }
                             })
+                            if (_find == 'ok') {
+                                res.status(200).json({
+                                    type: 'sp',
+                                    id: matchid,
+                                });
+                            } else { 
+                                res.status(200).json({
+                                    'error': 'no data ' + matchid + ' : ' + user.id,
+                                })
+                            }
+                            
                             
                         } else { 
                             
                             res.status(200).json({
-                                'error': 'no data',
+                                'error': 'no data ' + matchid + ' : ' + user.id,
                             })
                         }
                     });
@@ -188,17 +199,26 @@ router.post('/matching', async (req, res) => {
                     .exec(function(error, _data) {
                         console.log("me data", _data);
                         if (_data != null) {
-                            console.log(_data.othermatches.length);
+                            var _find = '';
                             _data.othermatches.forEach(function(e) {
-                                console.log('data >>> ', e.type, e.match, matchid);
+                                console.log('data >>> ', e.type, e.match, e.match._id, user.id);
                                 if (e.type == 'y' && e.match._id == user.id) {
-                                    res.status(200).json({
-                                        type:e.type,
-                                        id: matchid
-                                    });
-                                    return false;
+                                    console.log('fine ok');
+                                    _find = 'ok';
+                                    
                                 }
                             })
+                            if (_find == 'ok') {
+                                res.status(200).json({
+                                    type: 'y',
+                                    id: matchid,
+                                });
+                            } else { 
+                                res.status(200).json({
+                                    'error': 'no data ' + matchid + ' : ' + user.id,
+                                })
+                            }
+                            
                             
                         } else { 
                             
