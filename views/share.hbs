@@ -30,6 +30,7 @@
 
         console.log(canvas);
         saveAs(canvas.toDataURL(), 'file-name.png');
+        window.open().document.write('<img src="' + canvas.toDataURL() + '" />');
         top.location.href='https://www.facebook.com/readyenergy/';
     });
 });
@@ -38,6 +39,7 @@
 function saveAs(uri, filename) {
 
     var link = document.createElement('a');
+    
 
     if (typeof link.download === 'string') {
 
