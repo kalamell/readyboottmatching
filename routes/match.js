@@ -61,7 +61,7 @@ router.post('/matching', async (req, res) => {
 
         if (type == 'sp') {
             const me  = await Users.findOne({facebookid: user.id});
-            if (me.sp ==0 || null) {
+            if (me.sp == 0) {
                 res.status(200).json({
                     type: 'sp',
                     coin: 0,
@@ -121,9 +121,9 @@ router.post('/matching', async (req, res) => {
                                 })
                                 
                             } else { 
-                                Users.findByIdAndUpdate(user.id,
+                                Users.findByIdAndUpdate(matchid,
                                     { "$push": { "othermatches":  {
-                                        "match": matchid, 
+                                        "match": user.id, 
                                         "type": type }} },
                                     { "new": true, "upsert": true },
                                     function (err, managerparent) {
@@ -200,9 +200,9 @@ router.post('/matching', async (req, res) => {
                                 })
                                 
                             } else { 
-                                Users.findByIdAndUpdate(user.id,
+                                Users.findByIdAndUpdate(matchid,
                                     { "$push": { "othermatches":  {
-                                        "match": matchid, 
+                                        "match": user.id, 
                                         "type": type }} },
                                     { "new": true, "upsert": true },
                                     function (err, managerparent) {
