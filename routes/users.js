@@ -109,4 +109,10 @@ router.get('/shared', isAuth, async (req, res) => {
     });
 })
 
+router.post('/doshare', isAuth, (req, res) => {
+    const user = req.session.passport.user;
+    Users.updateOne({facebookid: user.id}, { $inc: { sp: 1}}, function(err, resp) {
+    });
+})
+
 module.exports = router;

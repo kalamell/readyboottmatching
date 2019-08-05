@@ -45,7 +45,10 @@ router.get('/result/:id/:type', isAuth, async (req, res) => {
     } 
 
     if (type == 'sp') {
-
+        res.render('match/sp', {
+            me, 
+            match
+        })
     }
 })
 
@@ -57,6 +60,92 @@ router.post('/matching', async (req, res) => {
     try {
 
         if (type == 'sp') {
+            const me  = await Users.findOne({facebookid: user.id});
+            if (me.sp ==0 || null) {
+                res.status(200).json({
+                    type: 'sp',
+                    coin: 0,
+                });
+            } else { 
+                Users.updateOne({facebookid: user.id}, { $inc: { sp: -1}}, function(err, resp) {
+                });
+
+                await Users.findOne({_id: user.id, "matches.match" : matchid})
+                .populate('match')
+                .populate('matches.match', 'name')
+                .exec(function(error, data) {
+                    if (error) {
+                        res.status(200).json(error);
+                    } else {
+                        if (data == null) {
+                            Users.findByIdAndUpdate(user.id,
+                                { "$push": { "matches":  {
+                                    "match": matchid, 
+                                    "type": type }} },
+                                { "new": true, "upsert": true },
+                                function (err, managerparent) {
+                                    if (err) throw err;
+                                    //console.log(managerparent);
+                                }
+                            );
+                        } else { 
+                            Users.findByIdAndUpdate(user.id, 
+                            {
+                                $set: { 
+                                    matches: [{ 
+                                        match: matchid, 
+                                        type: type 
+                                    }] 
+                                }
+                            }, 
+                            { new: true },
+                            function(err, user) {
+                            });
+                        }
+                    }
+
+                    if (user.id != matchid) {
+                        Users.findOne({_id: user.id, "othermatches.match" : matchid})
+                        .populate('match')
+                        .populate('othermatches.match', '_id fullname')
+                        .exec(function(error, _data) {
+                            if (_data != null) {
+                                _data.othermatches.forEach(function(e) {
+                                    console.log('data >>> ', e.match);
+                                    if (e.type == 'sp' && e.match._id == matchid) {
+                                        res.status(200).json({
+                                            type:e.type,
+                                            id: e.match._id
+                                        });
+                                    }
+                                })
+                                
+                            } else { 
+                                Users.findByIdAndUpdate(user.id,
+                                    { "$push": { "othermatches":  {
+                                        "match": matchid, 
+                                        "type": type }} },
+                                    { "new": true, "upsert": true },
+                                    function (err, managerparent) {
+                                        if (err) throw err;
+                                        //console.log(managerparent);
+                                    }
+                                );
+                                
+                                res.status(500).json({
+                                    'error': 'no data',
+                                })
+                            }
+                        });
+                    } else { 
+                        res.status(200).json({
+                            'error': 'erro',
+                        })
+                    }
+                });
+            
+            }
+
 
         } else { 
             if (type =='y') {
@@ -78,8 +167,20 @@ router.post('/matching', async (req, res) => {
                                     //console.log(managerparent);
                                 }
                             );
-
-                        } 
+                        } else { 
+                            Users.findByIdAndUpdate(user.id, 
+                            {
+                                $set: { 
+                                    matches: [{ 
+                                        match: matchid, 
+                                        type: type 
+                                    }] 
+                                }
+                            }, 
+                            { new: true },
+                            function(err, user) {
+                            });
+                        }
                     }
 
                     if (user.id != matchid) {
@@ -99,6 +200,17 @@ router.post('/matching', async (req, res) => {
                                 })
                                 
                             } else { 
+                                Users.findByIdAndUpdate(user.id,
+                                    { "$push": { "othermatches":  {
+                                        "match": matchid, 
+                                        "type": type }} },
+                                    { "new": true, "upsert": true },
+                                    function (err, managerparent) {
+                                        if (err) throw err;
+                                        //console.log(managerparent);
+                                    }
+                                );
+                                
                                 res.status(500).json({
                                     'error': 'no data',
                                 })
