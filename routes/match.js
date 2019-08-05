@@ -17,11 +17,12 @@ router.get('/', isAuth, async function(req,res){
     let range_max = data.range_max;
 
     Users.find({
+        /*
         sex: interest,
         age: {
             $gte: range_min ,
             $lte: range_max,
-        }
+        }*/
     }).exec(function(err, data_users) {
         if (data_users.length == 0) {
             res.redirect('/user');
@@ -170,33 +171,6 @@ router.post('/matching', async (req, res) => {
                     if (error) {
                         res.status(200).json(error);
                     } else {
-                        /*
-                        if (data == null) {
-                            Users.findByIdAndUpdate(user.id,
-                                { "$push": { "matches":  {
-                                    "match": matchid, 
-                                    "type": type }} },
-                                { "new": true, "upsert": true },
-                                function (err, managerparent) {
-                                    if (err) throw err;
-                                    //console.log(managerparent);
-                                }
-                            );
-                        } else { 
-                            Users.findByIdAndUpdate(user.id, 
-                            {
-                                $set: { 
-                                    matches: [{ 
-                                        match: matchid, 
-                                        type: type 
-                                    }] 
-                                }
-                            }, 
-                            { new: true },
-                            function(err, user) {
-                            });
-                        }
-                        */
                        Users.findByIdAndUpdate(user.id,
                             { "$push": { "matches":  {
                                 "match": matchid, 
@@ -234,7 +208,7 @@ router.post('/matching', async (req, res) => {
                                     { "new": true, "upsert": true },
                                     function (err, managerparent) {
                                         if (err) throw err;
-                                        //console.log(managerparent);
+                                        console.log(managerparent);
                                     }
                                 );
                                 
