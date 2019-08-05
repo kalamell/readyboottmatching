@@ -102,7 +102,7 @@ router.post('/update', [isAuth, upload.single('file')], async (req, res) => {
 
 router.get('/shared', isAuth, async (req, res) => {
     const user = req.session.passport.user;
-    const data  =  await Users.findOne({facebookid: user.id});ห
+    const data  =  await Users.findOne({facebookid: user.id});
     res.render('share', {
         data
     });
