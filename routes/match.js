@@ -118,35 +118,31 @@ router.post('/matching', async (req, res) => {
                         
                     }
 
-                    if (user.id != matchid) {
-                        Users.findOne({_id: user.id, "othermatches.match" : matchid})
-                        .populate('match')
-                        .populate('othermatches.match', '_id fullname')
-                        .exec(function(error, _data) {
-                            if (_data != null) {
-                                _data.othermatches.forEach(function(e) {
-                                    console.log('data >>> ', e.match);
-                                    if (e.type == 'sp' && e.match._id == matchid) {
-                                        res.status(200).json({
-                                            type:e.type,
-                                            id: e.match._id
-                                        });
-                                        return false;
-                                    }
-                                })
-                                
-                            } else { 
-                                
-                                res.status(200).json({
-                                    'error': 'no data',
-                                })
-                            }
-                        });
-                    } else { 
-                        res.status(200).json({
-                            'error': 'erro',
-                        })
-                    }
+                    
+                    Users.findOne({_id: matchid, "othermatches.match" : user.id})
+                    .populate('match')
+                    .populate('othermatches.match', '_id fullname')
+                    .exec(function(error, _data) {
+                        if (_data != null) {
+                            _data.othermatches.forEach(function(e) {
+                                console.log('data >>> ', e.match);
+                                if (e.type == 'sp' && e.match._id == user.id) {
+                                    res.status(200).json({
+                                        type:e.type,
+                                        id: e.matchid
+                                    });
+                                    return false;
+                                }
+                            })
+                            
+                        } else { 
+                            
+                            res.status(200).json({
+                                'error': 'no data',
+                            })
+                        }
+                    });
+                    
                 });
             
             }
@@ -186,7 +182,7 @@ router.post('/matching', async (req, res) => {
                     }
 
 
-                    Users.findOne({_id: user.id, "othermatches.match" : matchid})
+                    Users.findOne({_id: matchid, "othermatches.match" : user.id})
                     .populate('match')
                     .populate('othermatches.match', '_id type fullname')
                     .exec(function(error, _data) {
@@ -195,7 +191,7 @@ router.post('/matching', async (req, res) => {
                             console.log(_data.othermatches.length);
                             _data.othermatches.forEach(function(e) {
                                 console.log('data >>> ', e.type, e.match, matchid);
-                                if (e.type == 'y' && e.match == matchid) {
+                                if (e.type == 'y' && e.match._id == matchid) {
                                     res.status(200).json({
                                         type:e.type,
                                         id: e.match
