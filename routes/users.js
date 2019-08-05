@@ -132,7 +132,9 @@ router.get('/matches', isAuth, async (req, res) => {
 
     await Users.findOne({_id: user.id})
         .exec(function(error, data) {
-            console.log('value : ', data);
+            data.matces.forEach(function(d) {
+                console.log(d);
+            })
         });
    
                 res.render('list-match', {
