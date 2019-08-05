@@ -137,12 +137,12 @@ router.get('/matches', isAuth, async (req, res) => {
                     console.log(_d.othermatches);
 
                     _d.othermatches.forEach(function(__d) {
-                        if (__d.match == user.id) {
+                        //if (__d.match == user.id) {
                             data_user.push({
                                 'name': _d.fullname,
                                 'type': __d.type
                             });
-                        }
+                        //}
                     })
                 })
             })
