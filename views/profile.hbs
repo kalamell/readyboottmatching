@@ -19,7 +19,7 @@ select { color: #fff; width: 100%; border: 0px; background-color: transparent;}
   </style>
   <form method="POST" action="/user/update" enctype="multipart/form-data">
   <section class="wrapper" id="profile">
-     <img class="logo" src="images/logo_ready.png" alt="">
+     <img class="logo" src="/images/logo_ready.png" alt="">
     <div class="profile-wrap">
      <div class="pic-wrap">
       <div class="profile-pic">
@@ -28,7 +28,7 @@ select { color: #fff; width: 100%; border: 0px; background-color: transparent;}
         </div>
         <div class="profile-new">
            <input type="file" id="profilePic" accept="image/*" name="file">
-           <label for="profilePic"><img src="images/picture.png" alt=""></label>
+           <label for="profilePic"><img src="/images/picture.png" alt=""></label>
         </div>
         <h5>สวัสดี คุณ<span>{{data.fullname}}</span></h5>
         <p>คุณสามารถเปลี่ยนรูปของตัวเองได้</p>
@@ -137,7 +137,7 @@ select { color: #fff; width: 100%; border: 0px; background-color: transparent;}
   </section>
   </form>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="/scripts/range.js"></script>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
   <script>
@@ -174,5 +174,6 @@ $("#profilePic").change(function() {
   }
 </script>
 
+<script src="/scripts/range.js"></script>
 </body>
 </html>
