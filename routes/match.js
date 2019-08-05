@@ -31,12 +31,28 @@ router.get('/', isAuth, async function(req,res){
 
 });
 
+router.get('/result/:id/:type', isAuth, async (req, res) => {
+    let { id, type }=req.params;
+    const user = req.session.passport.user;
+
+    const me  = await Users.findOne({facebookid: user.id});
+    const match = await Users.findOne({facebookid: id});
+    if (type == 'y') {
+        res.render('match/y', {
+            me, 
+            match
+        })
+    } 
+
+    if (type == 'sp') {
+
+    }
+})
+
 router.post('/matching', async (req, res) => { 
     const user = req.session.passport.user;
     let { id, type } = req.body;
     let matchid = id.replace("#", "");
-
-    console.log(matchid, id);
 
     if (type == 'sp') {
 
@@ -61,19 +77,25 @@ router.post('/matching', async (req, res) => {
                             }
                         );
 
-                        Users.findByIdAndUpdate(matchid,
-                            { "$push": { "othermatches":  {
-                                "match": user.id, 
-                                "type": type }} },
-                            { "new": true, "upsert": true },
-                            function (err, managerparent) {
-                                if (err) throw err;
-                                //console.log(managerparent);
+                    } 
+                }
+
+                if (user.id != matchid) {
+                    Users.findOne({_id: user.id, "othermatches.match" : matchid})
+                    .populate('match')
+                    .populate('othermatches.match', '_id fullname')
+                    .exec(function(error, _data) {
+
+                        _data.othermatches.forEach(function(e) {
+                            if (e.type == 'y') {
+                                res.json({
+                                    type: e.type, 
+                                    id: matchid,
+                                });
                             }
-                        );
-                    } else { 
-                        console.log(data);
-                    }
+                        })
+                    
+                    });
                 }
             });
         }
