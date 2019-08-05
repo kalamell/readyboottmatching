@@ -144,11 +144,12 @@ router.get('/matches', isAuth, async (req, res) => {
                                 'type': __d.type,
                                 'profile_url': _d.profile_url
                             });
+                            console.log('data: ', data_user);
                     })
                 })
             })
         });
-    console.log('data: ', data_user);
+   
    
                 res.render('list-match', {
                     me,
