@@ -90,33 +90,35 @@ router.post('/matching', async (req, res) => {
                     if (error) {
                         res.status(200).json(error);
                     } else {
-                        Users.findByIdAndUpdate(user.id,
-                            { "$push": { "matches":  {
-                                "match": matchid, 
-                                "type": type }} },
-                            { "new": true, "upsert": true },
-                            function (err, managerparent) {
-                                if (err) throw err;
-                                //console.log(managerparent);
-                            }
-                        );
+                        if (data == null) {
+                            Users.findByIdAndUpdate(user.id,
+                                { "$push": { "matches":  {
+                                    "match": matchid, 
+                                    "type": type }} },
+                                { "new": true, "upsert": true },
+                                function (err, managerparent) {
+                                    if (err) throw err;
+                                    //console.log(managerparent);
+                                }
+                            );
 
-                        Users.findByIdAndUpdate(matchid,
-                            { "$push": { "othermatches":  {
-                                "match": user.id, 
-                                "type": type }} },
-                            { "new": true, "upsert": true },
-                            function (err, managerparent) {
-                                if (err) throw err;
-                                console.log(managerparent);
-                            }
-                        );
+                            Users.findByIdAndUpdate(matchid,
+                                { "$push": { "othermatches":  {
+                                    "match": user.id, 
+                                    "type": type }} },
+                                { "new": true, "upsert": true },
+                                function (err, managerparent) {
+                                    if (err) throw err;
+                                    console.log(managerparent);
+                                }
+                            );
+                        }
                     }
 
                     
-                    Users.findOne({_id: matchid, "othermatches.match" : user.id})
+                    Users.findOne({_id: matchid, "matches.match" : user.id})
                     .populate('match')
-                    .populate('othermatches.match', '_id type fullname')
+                    .populate('matches.match', '_id type fullname')
                     .exec(function(error, _data) {
                         console.log("me data", _data);
                         if (_data != null) {
