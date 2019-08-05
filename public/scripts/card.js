@@ -269,7 +269,7 @@ function onButtonSpClick(e) {
   var buttonClass = e.currentTarget.className;
   state.element = cardsBlock.querySelector('.app--element:not(.removed)');
   state.element.style.opacity = '0';
-  moveBlockOutside(delta, 'sp');
+  moveBlockOutside(1, 'sp');
   setCardStyle();
   
 }
