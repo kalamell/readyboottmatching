@@ -88,18 +88,16 @@ router.post('/matching', async (req, res) => {
                                 }
                             );
                         } else { 
-                            Users.findByIdAndUpdate(user.id, 
-                            {
-                                $set: { 
-                                    matches: [{ 
-                                        match: matchid, 
-                                        type: type 
-                                    }] 
+                            Users.findByIdAndUpdate(user.id,
+                                { "$push": { "matches":  {
+                                    "match": matchid, 
+                                    "type": type }} },
+                                { "new": true, "upsert": true },
+                                function (err, managerparent) {
+                                    if (err) throw err;
+                                    //console.log(managerparent);
                                 }
-                            }, 
-                            { new: true },
-                            function(err, user) {
-                            });
+                            );
                         }
                     }
 
@@ -155,6 +153,7 @@ router.post('/matching', async (req, res) => {
                     if (error) {
                         res.status(200).json(error);
                     } else {
+                        /*
                         if (data == null) {
                             Users.findByIdAndUpdate(user.id,
                                 { "$push": { "matches":  {
@@ -180,6 +179,17 @@ router.post('/matching', async (req, res) => {
                             function(err, user) {
                             });
                         }
+                        */
+                       Users.findByIdAndUpdate(user.id,
+                            { "$push": { "matches":  {
+                                "match": matchid, 
+                                "type": type }} },
+                            { "new": true, "upsert": true },
+                            function (err, managerparent) {
+                                if (err) throw err;
+                                //console.log(managerparent);
+                            }
+                        );
                     }
 
                     if (user.id != matchid) {
