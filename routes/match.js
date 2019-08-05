@@ -54,72 +54,66 @@ router.post('/matching', async (req, res) => {
     let { id, type } = req.body;
     let matchid = id.replace("#", "");
 
-    if (type == 'sp') {
+    try {
 
-    } else { 
-        if (type =='y') {
-            Users.findOne({_id: user.id, "matches.match" : matchid})
-            .populate('match')
-            .populate('matches.match', 'name')
-            .exec(function(error, data) {
-                if (error) {
-                    res.send('error');
-                } else {
-                    if (data == null) {
-                        Users.findByIdAndUpdate(user.id,
-                            { "$push": { "matches":  {
-                                "match": matchid, 
-                                "type": type }} },
-                            { "new": true, "upsert": true },
-                            function (err, managerparent) {
-                                if (err) throw err;
-                                //console.log(managerparent);
-                            }
-                        );
+        if (type == 'sp') {
 
-                    } 
-                }
-
-                if (user.id != matchid) {
-                    Users.findOne({_id: user.id, "othermatches.match" : matchid})
-                    .populate('match')
-                    .populate('othermatches.match', '_id fullname')
-                    .exec(function(error, _data) {
-                        if (_data != null) {
-                            _data.othermatches.forEach(function(e) {
-                                if (e.type == 'y') {
-                                   
-                                    res.status(200).json({
-                                        type: e.type, 
-                                        id: matchid,
-                                    });
+        } else { 
+            if (type =='y') {
+                await Users.findOne({_id: user.id, "matches.match" : matchid})
+                .populate('match')
+                .populate('matches.match', 'name')
+                .exec(function(error, data) {
+                    if (error) {
+                        res.status(200).json(error);
+                    } else {
+                        if (data == null) {
+                            Users.findByIdAndUpdate(user.id,
+                                { "$push": { "matches":  {
+                                    "match": matchid, 
+                                    "type": type }} },
+                                { "new": true, "upsert": true },
+                                function (err, managerparent) {
+                                    if (err) throw err;
+                                    //console.log(managerparent);
                                 }
-                            })
-                        } else { 
-                            res.status(500).json({
-                                'error': 'no data',
-                            })
-                        }
-                        /*if (error) {
-                            res.status(500);
-                            res.json('error', { error: error });
-                        }
-                        _data.othermatches.forEach(function(e) {
-                            if (e.type == 'y') {
-                                res.json({
-                                    type: e.type, 
-                                    id: matchid,
-                                });
+                            );
+
+                        } 
+                    }
+
+                    if (user.id != matchid) {
+                        Users.findOne({_id: user.id, "othermatches.match" : matchid})
+                        .populate('match')
+                        .populate('othermatches.match', '_id fullname')
+                        .exec(function(error, _data) {
+                            if (_data != null) {
+                                _data.othermatches.forEach(function(e) {
+                                    if (e.type == 'y') {
+                                    
+                                        res.status(200).json({
+                                            type: e.type, 
+                                            id: matchid,
+                                        });
+                                    }
+                                })
+                            } else { 
+                                res.status(500).json({
+                                    'error': 'no data',
+                                })
                             }
-                        })*/ 
+                        });
+                    } else { 
+                        res.status(200).json({
+                            'error': 'erro',
+                        })
+                    }
+                });
+            }
 
-                        res.status(200).json(_data);
-                    
-                    });
-                }
-            });
         }
-
+    } catch(err) {
+        console.log(err);
     }
    
 })
