@@ -121,7 +121,6 @@ function inputRange() {
         document.getElementById("range_min").value = formatPrice(m);
         document.getElementById("range_max").value = formatPrice(mx);
 
-        console.log('xxx');
 
     });
 
