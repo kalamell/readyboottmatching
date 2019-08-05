@@ -134,7 +134,7 @@ router.get('/matches', isAuth, async (req, res) => {
         .exec(function(error, data) {
             data.matches.forEach(function(d) {
                 Users.findOne({_id: d.match}).exec(function(e, _d) {
-                    console.log(_d.matches);
+                    console.log(_d.othermatches);
 
                     _d.othermatches.forEach(function(__d) {
                         if (__d.match == user.id) {
