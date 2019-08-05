@@ -89,6 +89,7 @@ router.post('/matching', async (req, res) => {
                         .exec(function(error, _data) {
                             if (_data != null) {
                                 _data.othermatches.forEach(function(e) {
+                                    console.log('data >>> ', e.match);
                                     if (e.type == 'y' && e.match._id == user.id) {
                                         console.log(e);
                                     }
