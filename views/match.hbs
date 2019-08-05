@@ -53,8 +53,8 @@ function setMatch(type, block) {
     type: type,
   }, function(res) {
     if (res.type == type) {
-      //top.location.href='/match/result/' + res.id + '/' + res.type;
-      alert('match');
+      top.location.href='/match/result/' + res.id + '/' + res.type;
+      //alert('match');
     }
   }, 'json')
 }
