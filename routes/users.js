@@ -137,6 +137,7 @@ router.get('/matches', isAuth, async (req, res) => {
                     console.log(_d.othermatches);
 
                     _d.othermatches.forEach(function(__d) {
+                        console.log('match :', __d.match);
                         //if (__d.match == user.id) {
                             data_user.push({
                                 'name': _d.fullname,
@@ -154,3 +155,4 @@ router.get('/matches', isAuth, async (req, res) => {
                 });
 })
 module.exports = router;
+
