@@ -48,12 +48,19 @@
     
 function setMatch(type, block) {
   console.log(block);
+  $.post('/match/matching', {
+    id: block,
+    type: type,
+  }, function(res) {
+    console.log(res);
+  }, 'json')
 }
 
 
 const cards = [
   {{#each users}}
   {
+    id: '{{facebookid}}',
     img: '{{profile_url}}',
     name: '{{fullname}}',
     age: '{{age}}',

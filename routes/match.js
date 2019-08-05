@@ -30,4 +30,11 @@ router.get('/', isAuth, async function(req,res){
 
 });
 
+router.post('/matching', async (req, res) => { 
+    let { id, type } = req.body;
+    res.json({
+        id, type
+    });
+})
+
 module.exports = router;

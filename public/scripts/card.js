@@ -93,7 +93,7 @@ setCardStyle();
 function getCardsMarkup() {
   let markUp = '';
   state.cards.map((item, index) => {
-    markUp += '<div class="app--element" id="#' + index + '"><img src="' + item.img +'"><p class="pic-name">สวัสดี คุณ'+ item.name + '</p><p class="pic-detail">อายุ '+ item.age + ' ปี ● ' + item.location + '</p></div>';
+    markUp += '<div class="app--element" id="#' + item.id + '"><img src="' + item.img +'"><p class="pic-name">สวัสดี คุณ'+ item.name + '</p><p class="pic-detail">อายุ '+ item.age + ' ปี ● ' + item.location + '</p></div>';
   })
   
   return markUp;
