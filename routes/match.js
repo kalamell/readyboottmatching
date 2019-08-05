@@ -193,7 +193,7 @@ router.post('/matching', async (req, res) => {
                             console.log(_data);
                             if (_data != null) {
                                 _data.othermatches.forEach(function(e) {
-                                    console.log('data >>> ', e.match);
+                                    console.log('data >>> ', e);
                                     if (e.type == 'y' && e.match == matchid) {
                                         res.status(200).json({
                                             type:e.type,
