@@ -132,7 +132,7 @@ router.get('/matches', isAuth, async (req, res) => {
 
     await Users.findOne({_id: user.id})
         .exec(function(error, data) {
-            data.matces.forEach(function(d) {
+            data.matches.forEach(function(d) {
                 console.log(d);
             })
         });
