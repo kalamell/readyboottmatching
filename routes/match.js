@@ -17,12 +17,11 @@ router.get('/', isAuth, async function(req,res){
     let range_max = data.range_max;
 
     Users.find({
-        /*
         sex: interest,
         age: {
             $gte: range_min ,
             $lte: range_max,
-        }*/
+        }
     }).exec(function(err, data_users) {
         if (data_users.length == 0) {
             res.redirect('/user');
