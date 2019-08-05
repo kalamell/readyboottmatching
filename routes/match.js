@@ -23,6 +23,10 @@ router.get('/', isAuth, async function(req,res){
             $lte: range_max,
         }
     }).exec(function(err, data_users) {
+        if (data_users.length == 0) {
+            res.redirect('/user');
+            return false;
+        }
         let users = [];
         data_users.forEach(function(e, v) {
             if (e._id != user.id) {
