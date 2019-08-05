@@ -85,7 +85,7 @@ router.post('/matching', async (req, res) => {
                     .populate('match')
                     .populate('othermatches.match', '_id fullname')
                     .exec(function(error, _data) {
-
+                        if (error) throw err;
                         _data.othermatches.forEach(function(e) {
                             if (e.type == 'y') {
                                 res.json({
