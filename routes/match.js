@@ -113,8 +113,6 @@ router.post('/matching', async (req, res) => {
                                 console.log(managerparent);
                             }
                         );
-                        
-                        
                     }
 
                     
