@@ -90,13 +90,14 @@ router.post('/matching', async (req, res) => {
                             if (_data != null) {
                                 _data.othermatches.forEach(function(e) {
                                     console.log('data >>> ', e.match);
-                                    if (e.type == 'y' && e.match._id == user.id) {
-                                        console.log(e);
+                                    if (e.type == 'y' && e.match._id == matchid) {
+                                        res.status(200).json({
+                                            type:e.type,
+                                            id: e.match._id
+                                        });
                                     }
                                 })
-                                res.status(200).json({
-                                    _data
-                                })
+                                
                             } else { 
                                 res.status(500).json({
                                     'error': 'no data',
