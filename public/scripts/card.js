@@ -277,6 +277,7 @@ function onButtonSpClick(e) {
 
 
 function onElementsEnd() {
+  top.location.reload();
   document.querySelector('.app--buttons').classList.add('hidden');
   document.querySelector('.app--title').classList.add('hidden');
   document.querySelector('.app--restart').classList.remove('hidden');
