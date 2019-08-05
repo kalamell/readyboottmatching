@@ -17,7 +17,6 @@ router.get('/', isAuth, async function(req,res){
     let range_max = data.range_max;
 
     Users.find({
-        $ne: user.id,
         sex: interest,
         age: {
             $gte: range_min ,
