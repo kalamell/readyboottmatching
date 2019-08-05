@@ -190,7 +190,7 @@ router.post('/matching', async (req, res) => {
                     .populate('match')
                     .populate('othermatches.match', '_id type fullname')
                     .exec(function(error, _data) {
-                        console.log(_data);
+                        console.log("me data", _data);
                         if (_data != null) {
                             _data.othermatches.forEach(function(e) {
                                 console.log('data >>> ', e);
