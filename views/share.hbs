@@ -12,15 +12,58 @@
         <h4>คุณ<span>{{ data.fullname }}</span> มีคู่เดทแล้ว!</h4>
       </div>
       <div class="share-wrap">
-        <a href="/download">ดาวน์โหลดรูปภาพแล้วไปร่วมกิจกรรมเลย!</a>
+        <a href="javascript:void(0);" id="download" class="download">ดาวน์โหลดรูปภาพแล้วไปร่วมกิจกรรมเลย!</a>
         <a href="javascript:void(0);" class="share">แชร์โปรไฟล์เพื่อเพิ่มสิทธิการถูกใจเป็นพิเศษ</a>
       </div>
     </div>
+  <div id="previewImage"></div>
   </section>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="/scripts/html2canvas.js"></script>
+  
   <script>
+
+    document.getElementById("download").addEventListener("click", function() {
+
+    html2canvas(document.querySelector('#share')).then(function(canvas) {
+
+        console.log(canvas);
+        saveAs(canvas.toDataURL(), 'file-name.png');
+        top.location.href='https://www.facebook.com/readyenergy/';
+    });
+});
+
+
+function saveAs(uri, filename) {
+
+    var link = document.createElement('a');
+
+    if (typeof link.download === 'string') {
+
+        link.href = uri;
+        link.download = filename;
+
+        //Firefox requires the link to be in the body
+        document.body.appendChild(link);
+
+        //simulate click
+        link.click();
+
+        //remove the link when done
+        document.body.removeChild(link);
+
+    } else {
+
+        window.open(uri);
+
+    }
+}
+
+
     $(function() {
+      
+      
       $("a.share").on('click', function() {
         FB.ui({
           method: 'share',
