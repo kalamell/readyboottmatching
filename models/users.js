@@ -16,6 +16,7 @@ const Users = new Schema ({
     interest: { type: String, default: 'female' },
     range_min: { type: Number, default: 18},
     range_max: { type: Number, default: 40},
+    sp: { type: Number, default: 1},
     matches: [{
         match: {
             type: String,

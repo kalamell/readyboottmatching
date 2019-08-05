@@ -17,11 +17,12 @@ router.get('/', isAuth, async function(req,res){
     let range_max = data.range_max;
 
     Users.find({
+        /*
         sex: interest,
         age: {
             $gte: range_min ,
             $lte: range_max,
-        }
+        }*/
     }).exec(function(err, users) {
         res.render('match', {
             users
@@ -31,10 +32,54 @@ router.get('/', isAuth, async function(req,res){
 });
 
 router.post('/matching', async (req, res) => { 
+    const user = req.session.passport.user;
     let { id, type } = req.body;
-    res.json({
-        id, type
-    });
+    let matchid = id.replace("#", "");
+
+    console.log(matchid, id);
+
+    if (type == 'sp') {
+
+    } else { 
+        if (type =='y') {
+            Users.findOne({_id: user.id, "matches.match" : matchid})
+            .populate('match')
+            .populate('matches.match', 'name')
+            .exec(function(error, data) {
+                if (error) {
+                    res.send('error');
+                } else {
+                    if (data == null) {
+                        Users.findByIdAndUpdate(user.id,
+                            { "$push": { "matches":  {
+                                "match": matchid, 
+                                "type": type }} },
+                            { "new": true, "upsert": true },
+                            function (err, managerparent) {
+                                if (err) throw err;
+                                //console.log(managerparent);
+                            }
+                        );
+
+                        Users.findByIdAndUpdate(matchid,
+                            { "$push": { "othermatches":  {
+                                "match": user.id, 
+                                "type": type }} },
+                            { "new": true, "upsert": true },
+                            function (err, managerparent) {
+                                if (err) throw err;
+                                //console.log(managerparent);
+                            }
+                        );
+                    } else { 
+                        console.log(data);
+                    }
+                }
+            });
+        }
+
+    }
+   
 })
 
 module.exports = router;
