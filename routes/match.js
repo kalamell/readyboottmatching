@@ -147,7 +147,7 @@ router.post('/matching', async (req, res) => {
                                     }
                                 );
                                 
-                                res.status(500).json({
+                                res.status(200).json({
                                     'error': 'no data',
                                 })
                             }
@@ -212,7 +212,7 @@ router.post('/matching', async (req, res) => {
                                     }
                                 );
                                 
-                                res.status(500).json({
+                                res.status(200).json({
                                     'error': 'no data ' + matchid + ' : ' + user.id,
                                 })
                             }
