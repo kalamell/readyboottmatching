@@ -22,7 +22,19 @@ router.get('/', isAuth, async function(req,res){
             $gte: range_min ,
             $lte: range_max,
         }
-    }).exec(function(err, users) {
+    }).exec(function(err, data_users) {
+        let users = [];
+        data_users.foreEach(function(e, v) {
+            if (e._id != user.id) {
+                users.push({
+                    'facebookid': e.facebookid,
+                    'profile_url': e.profile_url,
+                    'fullname': e.fullname,
+                    'age': e.age,
+                    'province': e.province,
+                })
+            }
+        });
         res.render('match', {
             users
         });
