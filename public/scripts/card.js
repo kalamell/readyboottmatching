@@ -84,6 +84,7 @@ let cardsBlock = document.querySelector('.app--cards');
 
 document.querySelector('.app--accept').addEventListener('click', onButtonClick);
 document.querySelector('.app--cancel').addEventListener('click', onButtonClick);
+document.querySelector('.app--sp').addEventListener('click', onButtonSpClick);
 
 document.querySelector('.app--restart').addEventListener('click', () => alert('Sorry! This button doesnt work right now. \nPlease reload the page'));
 
@@ -181,7 +182,7 @@ function onEndBlockMove(e) {
   app.removeEventListener('touchmove', onBlockMove)
 }
 
-function moveBlockOutside(delta) {
+function moveBlockOutside(delta, sp = '') {
   let block;
   if ( state.element ) {
     block = state.element;
@@ -201,6 +202,10 @@ function moveBlockOutside(delta) {
     block.style.transform = block.style.transform + ' translateX(-250%)';
     console.log('n');
     type = 'n';
+  }
+
+  if (sp !='') {
+    type = 'sp';
   }
 
   console.log(block.id);
@@ -259,6 +264,17 @@ function onButtonClick(e) {
     hideObject(0)
   }
 }
+
+function onButtonSpClick(e) {
+  var buttonClass = e.currentTarget.className;
+  state.element = cardsBlock.querySelector('.app--element:not(.removed)');
+  state.element.style.opacity = '0';
+  moveBlockOutside(delta, 'sp');
+  setCardStyle();
+  
+}
+
+
 
 function onElementsEnd() {
   document.querySelector('.app--buttons').classList.add('hidden');
