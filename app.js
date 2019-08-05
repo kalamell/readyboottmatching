@@ -20,6 +20,12 @@ const port = 3000;
 const Users = require('./models/users');
 
 
+app.use(function(req, res, next) {
+  res.locals.app_id = process.env.APP_ID;
+  next()
+})
+
+
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 passport.serializeUser(function(user, done) {

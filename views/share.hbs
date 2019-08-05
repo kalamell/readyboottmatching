@@ -1,0 +1,37 @@
+
+<body>
+
+  <section class="wrapper" id="share">
+    <img class="logo" src="/images/logo_ready.png" alt="">
+    <div class="share-wrap">
+      <h3>สนามรักเกิดขึ้นได้ทุกที่</h3>
+      <div class="pic-share-wrap">
+        <img src="{{ data.profile_url }}" alt="">
+      </div>
+      <div class="tag">
+        <h4>คุณ<span>{{ data.fullname }}</span> มีคู่เดทแล้ว!</h4>
+      </div>
+      <div class="share-wrap">
+        <a href="/download">ดาวน์โหลดรูปภาพแล้วไปร่วมกิจกรรมเลย!</a>
+        <a href="javascript:void(0);" class="share">แชร์โปรไฟล์เพื่อเพิ่มสิทธิการถูกใจเป็นพิเศษ</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    $(function() {
+      $("a.share").on('click', function() {
+        FB.ui({
+          method: 'share',
+          href: 'http://www.readyboottmatching.com'
+        }, function(response){
+          console.log(response);
+        });
+    
+
+      })
+    })
+  </script>
+</body>
+</html>

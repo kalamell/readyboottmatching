@@ -1,1 +1,47 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Ready Boott Ready to Match</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta property="og:url"                content="https://www.readyboottmatching.com/" />
+  <meta property="og:type"               content="website" />
+  <meta property="og:title"              content="Ready Boott matching" />
+  <meta property="og:description"        content="Ready to Match พร้อมรุกทุกสถานการณ์" />
+  <meta property="og:image"              content="https://www.readyboottmatching.com/images/share.jpg" />
+  <meta property="fb:app_id"             content="{{app_id}}" />
+
+
+  <meta name="description" content="ready">
+  <meta name="author" content="ready">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link href="/bundle.css" rel="stylesheet">
+
+  
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{{app_id}}',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v4.0'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+</head>
+
 {{{ body }}}
+
