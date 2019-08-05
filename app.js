@@ -19,6 +19,8 @@ var session = require('express-session')
 const port = 3000;
 const Users = require('./models/users');
 
+const fs = require('fs');
+const request = require('request');
 
 app.use(function(req, res, next) {
   res.locals.app_id = process.env.APP_ID;
@@ -42,26 +44,52 @@ passport.use(new FacebookStrategy({
   },
 
   function(accessToken, refreshToken, profile, done) {
-    let user = profile._json;
-    console.log(user);
-    Users.findOne({facebookid:user.id}).then(function(currentUser){
-      if(!currentUser){
-        console.log(profile);
-          const newUser = new Users({
-              _id: user.id,
-              facebookid: user.id,
-              fullname: user.name,
-              first_name: user.first_name,
-              last_name: user.last_name,
-              email: user.email,
-              profile_url: user.picture.data.url,
-          });
-          newUser.save(function(err,user){
-              if(err) throw err;
-              console.log(user);
-          });
-      } else { 
 
+    var download = function(uri, filename, callback){
+      request.head(uri, function(err, res, body){
+        console.log('content-type:', res.headers['content-type']);
+        console.log('content-length:', res.headers['content-length']);
+    
+        request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+      });
+    };
+    
+    let user = profile._json;
+
+    Users.findOne({facebookid:user.id}).then(function(currentUser){
+      if(!currentUser){  
+
+        var filename = Date.now() + '-' + user.id + '.png';
+        download(user.picture.data.url, 'public/upload/' + filename, function(){
+          console.log('done');
+        });
+        
+        const newUser = new Users({
+            _id: user.id,
+            facebookid: user.id,
+            fullname: user.name,
+            first_name: user.first_name,
+            last_name: user.last_name,
+            email: user.email,
+            profile_url: process.env.APP_URL + '/upload/' + filename,
+        });
+        newUser.save(function(err,user){
+            if(err) throw err;
+            console.log(user);
+        });
+      } else { 
+        var filename = Date.now() + '-' + user.id + '.png';
+        download(user.picture.data.url, 'public/upload/' + filename, function(){
+          console.log('done');
+        });
+        
+
+        if (currentUser.profile_url == '') {
+          console.log(currentUser);
+          Users.findOneAndUpdate({facebookid: user.id}, {
+            profile_url: process.env.APP_URL + '/upload/' + filename,
+          });
+        }
       }
     })
     done(null, user);

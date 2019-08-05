@@ -12,7 +12,12 @@
 #share .logo { width: 30%;}
   </style>
 
-  <section class="wrapper" id="share">
+  <div id="show">
+    <p>กดค้างเพื่อดาวน์โหลด</p>
+    <div id="ios"></div>
+  </div>
+
+  <section class="wrapper n1" id="share">
     <a href="/match"><img class="logo" src="/images/logo_ready.png" alt=""></a>
     <div class="share-wrap">
       <h3>สนามรักเกิดขึ้นได้ทุกที่</h3>
@@ -23,28 +28,49 @@
         <h4>คุณ<span>{{ data.fullname }}</span> มีคู่เดทแล้ว!</h4>
       </div>
       <div class="share-wrap">
-        <a href="javascript:void(0);" id="download" class="download">ดาวน์โหลดรูปภาพแล้วไปร่วมกิจกรรมเลย!</a>
-        <a href="javascript:void(0);" class="share">แชร์โปรไฟล์เพื่อเพิ่มสิทธิการถูกใจเป็นพิเศษ</a>
+        
+        {{#if ios}}
+        <a href="javascript:void(0);" id="downloadios" class="downloadios">ดาวน์โหลดรูปภาพแล้วไปร่วมกิจกรรมเลย! IOS</a>
+        {{/if}}
+
+        {{#if android}}
+        <a href="javascript:void(0);" id="download" class="download">ดาวน์โหลดรูปภาพแล้วไปร่วมกิจกรรมเลย! android</a>
+        {{/if}}
+
+
+         <a href="javascript:void(0);" class="share">แชร์โปรไฟล์เพื่อเพิ่มสิทธิการถูกใจเป็นพิเศษ</a>
+
       </div>
     </div>
-  <div id="previewImage"></div>
   </section>
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="/scripts/html2canvas.js"></script>
   
   <script>
 
+{{#if android}}
     document.getElementById("download").addEventListener("click", function() {
+      html2canvas(document.querySelector('.n1')).then(function(canvas) {
+          console.log(canvas);
+          saveAs(canvas.toDataURL(), 'file-name.png');
+          //window.open().document.write('<img src="' + canvas.toDataURL() + '" />');
+          //top.location.href='https://www.facebook.com/readyenergy/';
+      });
+  });
+  {{/if}}
 
-    html2canvas(document.querySelector('#share')).then(function(canvas) {
-
-        console.log(canvas);
-        saveAs(canvas.toDataURL(), 'file-name.png');
-        window.open().document.write('<img src="' + canvas.toDataURL() + '" />');
-        top.location.href='https://www.facebook.com/readyenergy/';
+  {{#if ios}}
+  document.getElementById("downloadios").addEventListener("click", function() {
+    html2canvas(document.querySelector('.n1')).then(function(canvas) {
+      $("#ios").append(canvas);
+      $(".n1").hide();
     });
 });
+
+{{/if}}
+
 
 
 function saveAs(uri, filename) {

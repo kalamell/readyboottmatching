@@ -10,6 +10,9 @@ const fs = require('fs');
 
 const { isAuth } = require('../helpers/auth');
 
+
+let MobileDetect = require('mobile-detect');
+
 router.get('/', isAuth, async (req, res) => {
 
     const user = req.session.passport.user;
@@ -101,10 +104,18 @@ router.post('/update', [isAuth, upload.single('file')], async (req, res) => {
 })
 
 router.get('/shared', isAuth, async (req, res) => {
+
+let md = new MobileDetect(req.headers['user-agent']);
+
     const user = req.session.passport.user;
     const data  =  await Users.findOne({facebookid: user.id});
+    const ios = md.os() == 'iOS' ? true : false;
+    const android = md.os() == 'AndroidOS' ? true : false;
+    console.log(md.os());
     res.render('share', {
-        data
+        data,
+        ios,
+        android
     });
 })
 
