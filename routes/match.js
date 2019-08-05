@@ -93,29 +93,29 @@ router.post('/matching', async (req, res) => {
                     if (error) {
                         res.status(200).json(error);
                     } else {
-                        if (data == null) {
-                            Users.findByIdAndUpdate(user.id,
-                                { "$push": { "matches":  {
-                                    "match": matchid, 
-                                    "type": type }} },
-                                { "new": true, "upsert": true },
-                                function (err, managerparent) {
-                                    if (err) throw err;
-                                    //console.log(managerparent);
-                                }
-                            );
-                        } else { 
-                            Users.findByIdAndUpdate(user.id,
-                                { "$push": { "matches":  {
-                                    "match": matchid, 
-                                    "type": type }} },
-                                { "new": true, "upsert": true },
-                                function (err, managerparent) {
-                                    if (err) throw err;
-                                    //console.log(managerparent);
-                                }
-                            );
-                        }
+                        Users.findByIdAndUpdate(user.id,
+                            { "$push": { "matches":  {
+                                "match": matchid, 
+                                "type": type }} },
+                            { "new": true, "upsert": true },
+                            function (err, managerparent) {
+                                if (err) throw err;
+                                //console.log(managerparent);
+                            }
+                        );
+
+                        Users.findByIdAndUpdate(matchid,
+                            { "$push": { "othermatches":  {
+                                "match": user.id, 
+                                "type": type }} },
+                            { "new": true, "upsert": true },
+                            function (err, managerparent) {
+                                if (err) throw err;
+                                console.log(managerparent);
+                            }
+                        );
+                        
+                        
                     }
 
                     if (user.id != matchid) {
@@ -136,16 +136,6 @@ router.post('/matching', async (req, res) => {
                                 })
                                 
                             } else { 
-                                Users.findByIdAndUpdate(matchid,
-                                    { "$push": { "othermatches":  {
-                                        "match": user.id, 
-                                        "type": type }} },
-                                    { "new": true, "upsert": true },
-                                    function (err, managerparent) {
-                                        if (err) throw err;
-                                        //console.log(managerparent);
-                                    }
-                                );
                                 
                                 res.status(200).json({
                                     'error': 'no data',
@@ -181,6 +171,18 @@ router.post('/matching', async (req, res) => {
                                 //console.log(managerparent);
                             }
                         );
+
+                        Users.findByIdAndUpdate(matchid,
+                            { "$push": { "othermatches":  {
+                                "match": user.id, 
+                                "type": type }} },
+                            { "new": true, "upsert": true },
+                            function (err, managerparent) {
+                                if (err) throw err;
+                                console.log(managerparent);
+                            }
+                        );
+                        
                     }
 
                     if (user.id != matchid) {
@@ -201,16 +203,6 @@ router.post('/matching', async (req, res) => {
                                 })
                                 
                             } else { 
-                                Users.findByIdAndUpdate(matchid,
-                                    { "$push": { "othermatches":  {
-                                        "match": user.id, 
-                                        "type": type }} },
-                                    { "new": true, "upsert": true },
-                                    function (err, managerparent) {
-                                        if (err) throw err;
-                                        console.log(managerparent);
-                                    }
-                                );
                                 
                                 res.status(200).json({
                                     'error': 'no data ' + matchid + ' : ' + user.id,
