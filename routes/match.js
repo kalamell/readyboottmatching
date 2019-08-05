@@ -114,6 +114,7 @@ router.post('/matching', async (req, res) => {
                                             type:e.type,
                                             id: e.match._id
                                         });
+                                        return false;
                                     }
                                 })
                                 
@@ -205,6 +206,7 @@ router.post('/matching', async (req, res) => {
                                             type:e.type,
                                             id: e.match._id
                                         });
+                                        return false;
                                     }
                                 })
                                 
