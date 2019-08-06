@@ -30,7 +30,7 @@ router.get('/', isAuth, async (req, res) => {
         min = 0;
     }
 
-    if (max<=99) {
+    if (max >= 80) {
         max = 100;
     }
 
