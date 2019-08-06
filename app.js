@@ -143,7 +143,7 @@ Handlebars.registerHelper("isFeMale", function(value) {
 
 
 Handlebars.registerHelper("isGLBT", function(value) {
-  return value == 'lgbt' ? 'checked' : '';
+  return value == 'glbt' ? 'checked' : '';
 })
 
 
