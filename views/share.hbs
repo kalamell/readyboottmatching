@@ -12,7 +12,7 @@
 #share .logo { width: 30%;}
   </style>
 
-  <div id="show" style="padding-top: 40px;">
+  <div id="show" style="padding-top: 40px; display: none;">
     <p>กดค้างเพื่อดาวน์โหลด <a href="https://www.facebook.com/readyenergy/">กดที่นี่เพื่อไปกิจกรรม</a></p>
     <div id="ios"></div>
   </div>
@@ -64,6 +64,7 @@
   {{#if ios}}
   document.getElementById("downloadios").addEventListener("click", function() {
     html2canvas(document.querySelector('.n1')).then(function(canvas) {
+      $("#show").show();
       $("#ios").append("<img  src='" + canvas.toDataURL() + "'/>");
       $(".n1").hide();
     });
