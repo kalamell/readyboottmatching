@@ -82,6 +82,7 @@ var storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
+
 router.post('/update', [isAuth, upload.single('file')], async (req, res) => {
     let { sex, interest, province, age, range_min, range_max } = req.body;
     const user = req.session.passport.user;
@@ -105,7 +106,7 @@ router.post('/update', [isAuth, upload.single('file')], async (req, res) => {
 
 router.get('/shared', isAuth, async (req, res) => {
 
-let md = new MobileDetect(req.headers['user-agent']);
+    let md = new MobileDetect(req.headers['user-agent']);
 
     const user = req.session.passport.user;
     const data  =  await Users.findOne({facebookid: user.id});
