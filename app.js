@@ -13,6 +13,7 @@ const usersRouter = require('./routes/users');
 const indexRouter = require('./routes/index');
 const matchRouter = require('./routes/match');
 const authRouter = require('./routes/auth');
+const mdataRouter = require('./routes/mdata');
 
 const helment = require('helmet');
 var session = require('express-session')
@@ -123,7 +124,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/match', matchRouter);
-
+app.use('/mdata', mdataRouter);
 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
 app.get('/auth/callback', passport.authenticate('facebook', { successRedirect: '/auth/login',
@@ -156,6 +157,11 @@ Handlebars.registerHelper("isType", function(value) {
   }
 })
 
+
+
+Handlebars.registerHelper("rank", function(value) {
+  return value+1;
+})
 
 app.listen(port, '127.0.0.1', function () {
   console.log('Example app listening on port 8080!');

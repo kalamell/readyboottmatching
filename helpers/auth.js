@@ -20,4 +20,17 @@ helpers.isLogin = async (req, res, next) => {
     }
 }
 
+
+
+helpers.isAdmin = async (req, res, next) => {
+    const admin = req.session.isadmin;
+    console.log(admin);
+    if (admin == null) {
+        res.redirect('/mdata/login');
+        
+    } else {
+        next();
+    }
+}
+
 module.exports = helpers;
