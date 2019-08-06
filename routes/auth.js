@@ -6,19 +6,22 @@ const Provinces = require('../models/provinces');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-router.get('/', (req, res) => {
+
+
+const { isAuth, isLogin } = require('../helpers/auth');
+
+
+router.get('/', isLogin, (req, res) => {
     res.render('login');
 })
 
 router.get('/login', (req, res) => {
-    if (req.user) {
-        req.session.id = req.user.id
-    }
+    
     res.redirect('/user');
 })
 
 router.get('/install', (req, res) => {
-   
+   res.redirect('/user');
     let povinces  =[
         {'province_name': 'กระบี่'},
         {'province_name': 'กรุงเทพมหานคร'},

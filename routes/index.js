@@ -7,7 +7,7 @@ const { isAuth, isLogin } = require('../helpers/auth');
 
 
 
-router.get('/', function(req,res){
+router.get('/', isLogin, function(req,res){
   res.render('index');
 });
 
