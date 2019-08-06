@@ -10,6 +10,16 @@
 #share .pic-share-wrap { width: 50%; margin: 0 auto;}
 #share .pic-share-wrap img { width: 83%; margin-left: -30px;}
 #share .logo { width: 30%;}
+.pc {
+  display: block;
+}
+@media screen and (max-width: 600px) {
+  .pc {
+    display: none !important;
+  }
+}
+
+
   </style>
 
   <div id="show" style="padding-top: 40px; display: none;">
@@ -38,6 +48,8 @@
         {{/if}}
 
 
+          <a href="javascript:void(0);" id="download" class="download pc">ดาวน์โหลดรูปภาพแล้วไปร่วมกิจกรรมเลย!</a>
+        
          <a href="javascript:void(0);" class="share">แชร์แอปเพื่อเพิ่มสิทธิ์การถูกใจเป็นพิเศษ</a>
 
       </div>
