@@ -87,6 +87,16 @@
 
 
 
+document.querySelector(".pc").addEventListener("click", function() {
+      html2canvas(document.querySelector('.n1')).then(function(canvas) {
+          console.log(canvas);
+          saveAs(canvas.toDataURL(), 'file-name.png');
+          //window.open().document.write('<img src="' + canvas.toDataURL() + '" />');
+          top.location.href='http://bit.ly/ApptoActivity';
+      });
+});
+
+
 function saveAs(uri, filename) {
 
     var link = document.createElement('a');
