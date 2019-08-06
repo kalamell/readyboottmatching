@@ -19,6 +19,22 @@ router.get('/', isAuth, async (req, res) => {
     const data  = await Users.findOne({facebookid: user.id});
     const provinces = await Provinces.find({});
     let data_provinces = [];
+
+    var min = 100 * ((data.range_min - 23) / (40 - 23)) + 1;
+    var max = 100 * ((data.range_max - 23) / (40 - 23)) - 1;
+
+    min = min.toFixed(0);
+    max = max.toFixed(0);
+
+    if (min <= 5) {
+        min = 0;
+    }
+
+    if (max<=99) {
+        max = 100;
+    }
+
+
     provinces.forEach(function(e, v) {
         if (e.province_name == data.province) {
             select = 'selected';
@@ -36,7 +52,9 @@ router.get('/', isAuth, async (req, res) => {
 
     res.render('profile', {
         data,
-        data_provinces
+        data_provinces,
+        min, 
+        max
     });
 
     console.log(data);

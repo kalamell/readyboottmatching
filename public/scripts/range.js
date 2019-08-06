@@ -113,8 +113,10 @@ function inputRange() {
         max = 40;
 
     slider.addEventListener('change', function () {
+        //console.log(slider.valueLow, ' ', max, ' ', min);
         lowDollarAmount.textContent = formatPrice(min + ((max - min) * (slider.valueLow / 100)));
         highDollarAmount.textContent = formatPrice(min + ((max - min) * (slider.valueHigh / 100)));
+        
 
         var m = min + ((max - min) * (slider.valueLow / 100));
         var mx = min + ((max - min) * (slider.valueHigh / 100));
