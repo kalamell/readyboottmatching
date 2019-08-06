@@ -22,7 +22,7 @@ router.get('/', isAuth, async function(req,res){
             $gte: range_min ,
             $lte: range_max,
         }
-    }).exec(function(err, data_users) {
+    }).sort({_id: -1}).exec(function(err, data_users) {
         if (data_users.length == 0) {
             res.redirect('/user');
             return false;
