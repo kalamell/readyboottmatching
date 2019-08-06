@@ -149,6 +149,12 @@ select { color: #fff; width: 100%; border: 0px; background-color: transparent;}
 
   <script>
     
+  $("form").on("submit", function() {
+    if $("input[name=age]").val() == '') {
+      $("input[name=age]").focus();
+      return false;
+    }
+  })
   function readURL(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
