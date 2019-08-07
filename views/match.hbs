@@ -50,7 +50,22 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-    
+    $(function() {
+      $("app-buttons div").on('click', function() {
+        $(this).css({
+            'transform':'scale(1.5)',
+            '-ms-transform':'scale(1.5)',
+            '-moz-transform':'scale(1.5)',
+            '-o-transform':'scale(1.5)
+        }).delay(500).css({
+          'transform':'',
+            '-ms-transform':'',
+            '-moz-transform':'',
+            '-o-transform':'''
+        })
+        
+      });
+    })
 function setMatch(type, block) {
   $.post('/match/matching', {
     id: block,
