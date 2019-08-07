@@ -33,7 +33,7 @@ body {
   margin: 20px; }
 
 .wrapper {
-  background: url(src/images/bg.jpg) center center;
+  background: url(images/bg.jpg) center center;
   position: fixed;
   margin: 0;
   position: absolute;
@@ -203,7 +203,7 @@ body {
   width: 50%; }
 
 #share .pic-share-wrap {
-  background: url(src/images/frame.png) no-repeat center center;
+  background: url(images/frame.png) no-repeat center center;
   display: block;
   width: 100%;
   height: auto;
@@ -259,7 +259,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url(src/images/frame.png);
+  background: url(images/frame.png);
   box-sizing: border-box black;
   width: 100%;
   height: 100%;
