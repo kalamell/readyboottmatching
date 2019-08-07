@@ -313,6 +313,8 @@ body {
   cursor: pointer;
   opacity: 1;
   transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
   transition: opacity .2s, transform .2s; }
   .app--accept p, .app--cancel p, .app--sp p {
     display: block;
@@ -320,20 +322,44 @@ body {
 
 .app--accept:hover, .app--cancel:hover, .app--sp:hover {
   opacity: 1;
-  transform: scale(1.2); }
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2); }
   @media (max-width: 40em) {
     .app--accept:hover, .app--cancel:hover, .app--sp:hover {
-      transform: scale(1); } }
+      transform: scale(1);
+      -webkit-transform: scale(1);
+      -moz-transform: scale(1); } }
 
 @media (max-width: 40em) {
   .app--accept:visited, .app--cancel:visited, .app--sp:visited, .app--accept:active, .app--cancel:active, .app--sp:active {
-    animation: pseudoAnim 0.2s ease-out alternate; } }
+    animation: pseudoAnim 0.4s ease-out alternate; } }
+
+@media (max-width: 40em) {
+  .app--accept:visited, .app--cancel:visited, .app--sp:visited, .app--accept:active, .app--cancel:active, .app--sp:active {
+    -webkit-animation: pseudoAnim 0.4s ease-out alternate; } }
+
+@media (max-width: 40em) {
+  .app--accept:visited, .app--cancel:visited, .app--sp:visited, .app--accept:active, .app--cancel:active, .app--sp:active {
+    -moz-animation: pseudoAnim 0.4s ease-out alternate; } }
 
 @keyframes pseudoAnim {
   0% {
     transform: scale(1); }
   100% {
     transform: scale(1.2); } }
+
+@-webkit-keyframes pseudoAnim {
+  0% {
+    -webkit-transform: scale(1); }
+  100% {
+    -webkit-transform: scale(1.2); } }
+
+@-moz-keyframes pseudoAnim {
+  0% {
+    -moz-transform: scale(1); }
+  100% {
+    -moz-transform: scale(1.2); } }
 
 .app--restart {
   position: absolute;
