@@ -73,9 +73,9 @@ function setMatch(type, block) {
 
 $(function() {
   $(".app--cancel, .app--sp, .app--accept").on("click", function() {
-    /*setTimeout(function() {
-      $(".app--cancel, .app--sp, .app--accept").css('transform', 'scale(1)');
-    }, 500);*/
+    setTimeout(function() {
+      $(".app--cancel img, .app--sp img, .app--accept img").css('transform', 'scale(1)');
+    }, 500);
   })
 })
 
