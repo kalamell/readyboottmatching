@@ -52,7 +52,6 @@
     <script>
     
 function setMatch(type, block) {
-  console.log(block);
   $.post('/match/matching', {
     id: block,
     type: type,
@@ -71,6 +70,14 @@ function setMatch(type, block) {
     }
   }, 'json')
 }
+
+$(function() {
+  $(".app--cancel, .app--sp, .app--accept").on("click", function() {
+    setTimeout(function() {
+      $(".app--cancel, .app--sp, .app--accept").css('transform', 'scale(1)');
+    }, 500);
+  })
+})
 
 
 const cards = [
