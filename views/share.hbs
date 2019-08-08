@@ -73,7 +73,7 @@
   });
   {{/if}}
 
-  {{#if ios}}
+
   document.getElementById("downloadios").addEventListener("click", function() {
     html2canvas(document.querySelector('.n1')).then(function(canvas) {
       $("#show").show();
@@ -83,20 +83,9 @@
     document.getElementById("downloadios").innerHTML = 'ดาวน์โหลดรูปภาพแล้วไปร่วมกิจกรรมเลย';
 });
 
-{{/if}}
 
 
 
-document.querySelector(".pc").addEventListener("click", function() {
-      html2canvas(document.querySelector('.n1')).then(function(canvas) {
-          console.log(canvas);
-          saveAs(canvas.toDataURL(), 'myprofile.png');
-          //window.open().document.write('<img src="' + canvas.toDataURL() + '" />');
-          setTimeout(function() {
-            top.location.href='http://bit.ly/ApptoActivity';
-          }, 1000);
-      });
-});
 
 
 function saveAs(uri, filename) {
