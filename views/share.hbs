@@ -73,7 +73,17 @@
   });
   {{/if}}
 
-
+$(function() {
+  $("#downloadios").on('click', function() {
+    html2canvas(document.querySelector('.n1')).then(function(canvas) {
+      $("#show").show();
+      $("#ios").append("<img  src='" + canvas.toDataURL() + "'/>");
+      $(".n1").hide();
+    });
+    alert('click donwload');
+  })
+})
+/*
   document.getElementById("downloadios").addEventListener("click", function() {
     html2canvas(document.querySelector('.n1')).then(function(canvas) {
       $("#show").show();
@@ -82,7 +92,7 @@
     });
     document.getElementById("downloadios").innerHTML = 'ดาวน์โหลดรูปภาพแล้วไปร่วมกิจกรรมเลย';
 });
-
+*/
 
 
 
