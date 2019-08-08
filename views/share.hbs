@@ -92,9 +92,11 @@
 document.querySelector(".pc").addEventListener("click", function() {
       html2canvas(document.querySelector('.n1')).then(function(canvas) {
           console.log(canvas);
-          saveAs(canvas.toDataURL(), 'file-name.png');
+          saveAs(canvas.toDataURL(), 'myprofile.png');
           //window.open().document.write('<img src="' + canvas.toDataURL() + '" />');
-          top.location.href='http://bit.ly/ApptoActivity';
+          setTimeout(function() {
+            top.location.href='http://bit.ly/ApptoActivity';
+          }, 1000);
       });
 });
 
