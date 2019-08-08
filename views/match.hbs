@@ -51,21 +51,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
     $(function() {
-      /*$(".app--buttons div").on('click', function() {
-        $(this).css({
+      $(".app--buttons div").on('click', function() {
+        var _this = $(this);
+        _this.css({
             'transform':'scale(1.5)',
             '-ms-transform':'scale(1.5)',
             '-moz-transform':'scale(1.5)',
             '-o-transform':'scale(1.5)'
-        }).delay(500).css({
-          'transform':'',
-            '-ms-transform':'',
-            '-moz-transform':'',
-            '-o-transform':''
         });
+        setTimeout(function() {
+          _this.css({
+            'transform':'',
+              '-ms-transform':'',
+              '-moz-transform':'',
+              '-o-transform':''
+          });
+        }, 200);
         console.log('click', this);
         
-      });*/
+      });
     })
 function setMatch(type, block) {
   $.post('/match/matching', {

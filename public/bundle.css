@@ -320,16 +320,19 @@ body {
     display: block;
     width: 100px; }
 
+  
 .app--accept:hover, .app--cancel:hover, .app--sp:hover {
+  /*
   opacity: 1;
   transform: scale(1.2);
   -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2); }
+  -moz-transform: scale(1.2); */}
+
   @media (max-width: 40em) {
     .app--accept:hover, .app--cancel:hover, .app--sp:hover {
-      transform: scale(1);
+      /*transform: scale(1);
       -webkit-transform: scale(1);
-      -moz-transform: scale(1); } }
+      -moz-transform: scale(1); */} }
 
 @media (max-width: 40em) {
   .app--accept:visited, .app--cancel:visited, .app--sp:visited, .app--accept:active, .app--cancel:active, .app--sp:active {
