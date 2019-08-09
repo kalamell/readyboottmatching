@@ -147,20 +147,20 @@ router.post('/doshare', isAuth, (req, res) => {
 
 router.get('/matches', isAuth, async (req, res) => {
     const user = req.session.passport.user;
-    const me  =  await Users.findOne({facebookid: user.id});
+    const me  =  await Users.findOne({facebookid: req.params.id});
     let data_user = [];
-    await Users.findOne({_id: user.id})
+    await Users.findOne({_id: req.params.id})
         .exec(function(error, data) {
             data.matches.forEach(function(d) {
                 Users.findOne({_id: d.match}).exec(function(e, _d) {
                     _d.matches.forEach(function(__d) {
-                        console.log('match :', __d.match);
-                        if (__d.match == user.id) {
+                        if (__d.match == req.params.id) {
                             data_user.push({
                                 'name': _d.fullname,
                                 'type': __d.type,
+                                'age': _d.age,
+                                'sex': _d.sex,
                                 'profile_url': _d.profile_url,
-                                'profile_url_me': data.profile_url
                             });
                         }
                     })

@@ -54,7 +54,7 @@ router.get('/user/match/:id', async (req, res) => {
             })
         });
         
-        res.render('backend/dashboard', {
+        res.render('backend/usermatch', {
             layout: 'backend',
             data_user,
             me

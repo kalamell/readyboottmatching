@@ -1,0 +1,37 @@
+{{> nav}}
+
+
+<div class="row" id="main">
+    <div class="col-md-12">
+        <p>ข้อมูล Match ของ {{me.fullname}} </p>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ลำดับ</th>
+                    <th>ภาพ</th>
+                    <th>ชื่อ - นามสกุล</th>
+                    <th>Email</th>
+                    <th>อายุ</th>
+                    <th>เพศ</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data_user}}
+                    <tr>
+                        <td>{{rank @index}}</td>
+                        <td><img src="{{profile_url}}" alt="" style="width: 200px;"></td>
+                        <td>{{ name }}</td>
+                        <td>{{ email }}</td>
+                        <td>{{ age }}</td>
+                        <td>{{ sex }}</td>
+                        
+                    </tr>
+                {{/each}}
+                
+            </tbody>
+
+        </table>
+        
+    </div>
+</div>
