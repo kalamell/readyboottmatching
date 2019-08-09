@@ -57,6 +57,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="/scripts/html2canvas.js"></script>
+  <script src="/scripts/jquery.fancybox/fancybox/jquery.fancybox-1.3.4.js"></script>
   
   <script>
 
@@ -77,10 +78,12 @@
 
 $(function() {
   $("#downloadios").on('click', function() {
+    $.fancybox.showLoading();
     html2canvas(document.querySelector('.n1')).then(function(canvas) {
       $("#show").show();
       $("#ios").append("<img  src='" + canvas.toDataURL() + "'/>");
       $(".n1").hide();
+      $.fancybox.hideLoding();
     });
     
   })
