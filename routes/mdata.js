@@ -41,7 +41,7 @@ router.get('/user/match/:id', async (req, res) => {
             Users.findOne({_id: d.match}).exec(function(e, _d) {
                 _d.matches.forEach(function(__d) {
                     console.log('match :', __d.match);
-                    if (__d.match == user.id) {
+                    if (__d.match == req.params.id) {
                         data_user.push({
                             'name': _d.fullname,
                             'type': __d.type,
