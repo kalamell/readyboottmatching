@@ -35,33 +35,37 @@ router.get('/user/match/:id', async (req, res) => {
     let data_user = [];
     const me  =  await Users.findOne({facebookid: req.params.id});
 
-    await Users.findOne({_id: req.params.id})
-    .exec(function(error, data) {
-        data.matches.forEach(function(d) {
-            Users.findOne({_id: d.match}).exec(function(e, _d) {
-                _d.matches.forEach(function(__d) {
-                    console.log('match :', __d.match);
-                    if (__d.match == req.params.id) {
-                        data_user.push({
-                            'name': _d.fullname,
-                            'type': __d.type,
-                            'profile_url': _d.profile_url,
-                            'sex': _d.sex,
-                            'age': _d.age,
-                            'email': _d.email,
-                        });
-                    }
-                })
+    try {
+        await Users.findOne({_id: req.params.id})
+        .exec(function(error, data) {
+            data.matches.forEach(function(d) {
+                Users.findOne({_id: d.match}).exec(function(e, _d) {
+                    _d.matches.forEach(function(__d) {
+                        console.log('match :', __d.match);
+                        if (__d.match == req.params.id) {
+                            data_user.push({
+                                'name': _d.fullname,
+                                'type': __d.type,
+                                'profile_url': _d.profile_url,
+                                'sex': _d.sex,
+                                'age': _d.age,
+                                'email': _d.email,
+                            });
+                        }
+                    })
 
-            })
+                })
+            });
+            
+            res.render('backend/usermatch', {
+                layout: 'backend',
+                data_user,
+                me
+            });
         });
-        
-        res.render('backend/usermatch', {
-            layout: 'backend',
-            data_user,
-            me
-        });
-    });
+    } catch (err) {
+        res.redirect('/');
+    }
 })
 
 
