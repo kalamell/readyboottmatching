@@ -16,7 +16,6 @@ router.get('/', isLogin, (req, res) => {
 })
 
 router.get('/login', (req, res) => {
-    
     res.redirect('/user');
 })
 

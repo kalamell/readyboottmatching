@@ -24,12 +24,44 @@ router.post('/login', (req, res) => {
     res.redirect('/mdata');
 })
 router.get('/', isAdmin, async (req, res) => {
-    const users = await Users.find({}).sort({_id: 1});
-    res.render('backend/dashboard', {
-        layout: 'backend',
-        users
-    })
+    let data_user = [];
+    const me  =  await Users.findOne({facebookid: req.params.id});
+
+    await Users.findOne({_id: req.params.id})
+    .exec(function(error, data) {
+        data.matches.forEach(function(d) {
+            Users.findOne({_id: d.match}).exec(function(e, _d) {
+                _d.matches.forEach(function(__d) {
+                    console.log('match :', __d.match);
+                    if (__d.match == user.id) {
+                        data_user.push({
+                            'name': _d.fullname,
+                            'type': __d.type,
+                            'profile_url': _d.profile_url,
+                            'profile_url_me': data.profile_url
+                        });
+                    }
+                })
+
+            })
+        });
+        
+        res.render('backend/dashboard', {
+            layout: 'backend',
+            data_user,
+            me
+        });
+    });
+    
 });
+
+router.get('/user/match/:id', (req, res) => {
+    let { id } = req.params;
+    res.render('backend/usermatch', {
+        layout: 'backend',
+        users,
+    })
+})
 
 
 
