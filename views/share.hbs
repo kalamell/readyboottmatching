@@ -78,12 +78,11 @@
 
 $(function() {
   $("#downloadios").on('click', function() {
-    $.fancybox.showLoading();
     html2canvas(document.querySelector('.n1')).then(function(canvas) {
       $("#show").show();
       $("#ios").append("<img  src='" + canvas.toDataURL() + "'/>");
       $(".n1").hide();
-      $.fancybox.hideLoding();
+      
     });
     
   })
