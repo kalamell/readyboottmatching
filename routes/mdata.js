@@ -24,6 +24,14 @@ router.post('/login', (req, res) => {
     res.redirect('/mdata');
 })
 router.get('/', isAdmin, async (req, res) => {
+    const users = await Users.find({}).sort({_id: 1});
+    res.render('backend/dashboard', {
+        layout: 'backend',
+        users
+    })
+});
+
+router.get('/user/match/:id', async (req, res) => {
     let data_user = [];
     const me  =  await Users.findOne({facebookid: req.params.id});
 
@@ -52,15 +60,6 @@ router.get('/', isAdmin, async (req, res) => {
             me
         });
     });
-    
-});
-
-router.get('/user/match/:id', (req, res) => {
-    let { id } = req.params;
-    res.render('backend/usermatch', {
-        layout: 'backend',
-        users,
-    })
 })
 
 
