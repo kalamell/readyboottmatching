@@ -17,6 +17,7 @@ const Users = new Schema ({
     range_min: { type: Number, default: 18},
     range_max: { type: Number, default: 40},
     sp: { type: Number, default: 1},
+    shared: { type: Number, default: 0},
     matches: [{
         match: {
             type: String,
