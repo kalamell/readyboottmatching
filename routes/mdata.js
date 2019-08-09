@@ -48,6 +48,7 @@ router.get('/user/match/:id', async (req, res) => {
                             'profile_url': _d.profile_url,
                             'sex': _d.sex,
                             'age': _d.age,
+                            'email': _d.email,
                         });
                     }
                 })
