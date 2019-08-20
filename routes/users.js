@@ -102,7 +102,7 @@ var storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post('/update', [isAuth, upload.single('file')], async (req, res) => {
-    let { sex, interest, province, age, range_min, range_max } = req.body;
+    let { sex, interest, province, age, range_min, range_max, fullname } = req.body;
     const user = req.session.passport.user;
     await Users.findOneAndUpdate({facebookid: user.id}, {
        sex, 
@@ -110,7 +110,8 @@ router.post('/update', [isAuth, upload.single('file')], async (req, res) => {
        province, 
        age,
        range_min,
-       range_max
+       range_max,
+       fullname
     });
 
    if (req.file != null) {
