@@ -11,4 +11,13 @@ router.get('/', isLogin, function(req,res){
   res.render('index');
 });
 
+router.get('/blahblah', function(req, res) {
+  req.session.passport = {
+    user: {
+      id: 9999
+    }
+  }
+  res.redirect('/user');
+})
+
 module.exports = router;
