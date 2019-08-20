@@ -72,23 +72,25 @@
       });
     })
 function setMatch(type, block) {
-  $.post('/match/matching', {
-    id: block,
-    type: type,
-  }, function(res) {
-    if (res.type == type) {
-      if (res.type =='sp') {
-        if (res.coin == 0) {
+  if (type !='n') {
+    $.post('/match/matching', {
+      id: block,
+      type: type,
+    }, function(res) {
+      if (res.type == type) {
+        if (res.type =='sp') {
+          if (res.coin == 0) {
 
+          } else { 
+            top.location.href='/match/result/' + res.id + '/' + res.type;
+          }
         } else { 
-           top.location.href='/match/result/' + res.id + '/' + res.type;
+          top.location.href='/match/result/' + res.id + '/' + res.type;
         }
-      } else { 
-        top.location.href='/match/result/' + res.id + '/' + res.type;
+        //alert('match');
       }
-      //alert('match');
-    }
-  }, 'json')
+    }, 'json')
+  }
 }
 
 $(function() {
