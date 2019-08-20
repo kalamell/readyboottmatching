@@ -33,6 +33,7 @@ router.get('/', isAuth, async function(req,res){
             //return false;
         }
         let users = [];
+        let no = 1;
         data_users.forEach(function(e, v) {
             if (e._id != user.id) {
                 users.push({
@@ -41,9 +42,20 @@ router.get('/', isAuth, async function(req,res){
                     'fullname': e.fullname,
                     'age': e.age,
                     'province': e.province,
-                })
+                });
+                if (no == 10 && ready !='') {
+                    users.push({
+                        'facebookid': ready.facebookid,
+                        'profile_url': ready.profile_url,
+                        'fullname': ready.fullname,
+                        'age': ready.age,
+                        'province': ready.province,
+                    });
+                }
+                no++;
             }
         });
+        ready = '';
         res.render('match', {
             users,
             ready
