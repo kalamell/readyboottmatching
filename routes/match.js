@@ -134,11 +134,11 @@ router.post('/matching', async (req, res) => {
                     }
 
                     
-                    Users.findOne({_id: matchid, "matches.match" : user.id})
+                    //Users.findOne({_id: matchid, "matches.match" : user.id})
+                    Users.findOne({_id: matchid})
                     .populate('match')
                     .populate('matches.match', '_id type fullname')
                     .exec(function(error, _data) {
-                        console.log("me data", _data);
                         if (_data != null) {
                             var _find = '';
                             _data.othermatches.forEach(function(e) {
