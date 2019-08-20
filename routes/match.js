@@ -143,7 +143,7 @@ router.post('/matching', async (req, res) => {
                             var _find = '';
                             _data.othermatches.forEach(function(e) {
                                 console.log('data >>> ', e.type, e.match, e.match._id, user.id);
-                                if (e.type == 'sp' && e.match._id == user.id) {
+                                if (e.type == 'sp' && e.match == user.id) {
                                     console.log('fine ok');
                                     _find = 'ok'; 
                                 }
@@ -155,12 +155,12 @@ router.post('/matching', async (req, res) => {
                                 });
                             } else { 
                                 res.status(200).json({
-                                    'error': 'no data ' + matchid + ' : ' + user.id,
+                                    'error': 'match no data ' + matchid + ' : ' + user.id,
                                 })
                             }
                         } else { 
                             res.status(200).json({
-                                'error': 'no data ' + matchid + ' : ' + user.id,
+                                'error': 'error no data ' + matchid + ' : ' + user.id,
                             })
                         }
                     });
