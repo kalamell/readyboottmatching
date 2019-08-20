@@ -15,6 +15,11 @@ router.get('/', isAuth, async function(req,res){
     let interest  = data.interest;
     let range_min = data.range_min;
     let range_max = data.range_max;
+    let ready = '';
+
+    if (user.id != '9999') {
+        ready = await Users.findOne({facebookid: '9999'});
+    }
 
     Users.find({
         sex: interest,
@@ -24,8 +29,8 @@ router.get('/', isAuth, async function(req,res){
         }
     }).sort({_id: 1}).exec(function(err, data_users) {
         if (data_users.length == 0) {
-            res.redirect('/user');
-            return false;
+            //res.redirect('/user');
+            //return false;
         }
         let users = [];
         data_users.forEach(function(e, v) {
@@ -40,7 +45,8 @@ router.get('/', isAuth, async function(req,res){
             }
         });
         res.render('match', {
-            users
+            users,
+            ready
         });
     })
 

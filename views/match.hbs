@@ -101,6 +101,15 @@ $(function() {
 
 
 const cards = [
+  {{#if ready}}
+  {
+    id: '{{ready.facebookid}}',
+    img: '{{ready.profile_url}}',
+    name: ' {{ready.fullname}}',
+    age: '{{ready.age}}',
+    location: '{{ready.province}}'
+  },
+  {{/if}}
   {{#each users}}
   {
     id: '{{facebookid}}',
