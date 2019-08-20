@@ -199,17 +199,18 @@ router.post('/matching', async (req, res) => {
                         }
                     }
 
-                    Users.findOne({_id: matchid, "matches.match" : user.id})
+
+                    Users.findOne({_id: matchid})
                     .populate('match')
                     .populate('matches.match', '_id type fullname')
                     .exec(function(error, _data) {
                         if (_data != null) {
                             var _find = '';
-                            _data.matches.forEach(function(e) {
-                                if (e.type == 'y' && e.match._id == user.id) {
+                            _data.othermatches.forEach(function(e) {
+                                console.log('data >>> ', e.type, e.match, e.match._id, user.id);
+                                if (e.type == 'y' && e.match == user.id) {
                                     console.log('fine ok');
-                                    _find = 'ok';
-                                    
+                                    _find = 'ok'; 
                                 }
                             })
                             if (_find == 'ok') {
@@ -219,15 +220,12 @@ router.post('/matching', async (req, res) => {
                                 });
                             } else { 
                                 res.status(200).json({
-                                    'error': 'no data ' + matchid + ' : ' + user.id,
+                                    'error': 'match no data ' + matchid + ' : ' + user.id,
                                 })
                             }
-                            
-                            
                         } else { 
-                            
                             res.status(200).json({
-                                'error': 'no data ' + matchid + ' : ' + user.id,
+                                'error': 'error no data ' + matchid + ' : ' + user.id,
                             })
                         }
                     });
