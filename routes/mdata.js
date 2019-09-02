@@ -111,7 +111,7 @@ router.get('/export', isAdmin, async (req, res) => {
 
     
 
-    wb.write('export-ready.xlsx'); 
+    wb.write('export-ready.xlsx', res); 
 
 })
 
